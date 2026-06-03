@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pleidelsheimer Str. 3 — Buyer's Dossier for Nithin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3ede2;
+    --paper-2:#ece4d3;
+    --ink:#16140f;
+    --ink-2:#3a342a;
+    --rule:#1a1814;
+    --accent:#9b2615;     /* oxblood */
+    --accent-2:#c9491e;
+    --gold:#a07a1a;
+    --green:#3d5d2a;
+    --amber:#a86b14;
+    --red:#8c1f12;
+    --blue:#1f3a5f;
+    --shadow:0 1px 0 rgba(22,20,15,.08), 0 14px 30px -18px rgba(22,20,15,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Fraunces', Georgia, serif;
+    font-size:17px;
+    line-height:1.55;
+    font-feature-settings:"ss01","ss02","liga","onum";
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse at 12% 0%, rgba(160,122,26,.08), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(155,38,21,.06), transparent 50%),
+      repeating-linear-gradient(0deg, rgba(22,20,15,.018) 0 1px, transparent 1px 3px);
+  }
+  .grain::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:50;mix-blend-mode:multiply;opacity:.35;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:48px 56px 120px}
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace;letter-spacing:.02em}
+  .ui{font-family:'Inter Tight', sans-serif;letter-spacing:.01em}
+
+  /* MASTHEAD */
+  .masthead{
+    border-top:6px double var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:18px 0 22px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:24px;
+  }
+  .mh-left,.mh-right{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-2)}
+  .mh-right{text-align:right}
+  .mh-title{font-family:'Fraunces',serif;font-weight:900;font-size:34px;letter-spacing:-.01em;text-align:center;font-variation-settings:"SOFT" 0,"WONK" 1}
+  .mh-title em{font-style:italic;color:var(--accent);font-weight:600}
+
+  .deck{
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:24px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:22px;
+  }
+  .deck h1{
+    grid-column:1 / span 8;
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:64px;
+    line-height:1.02;
+    margin:18px 0 6px;
+    letter-spacing:-.02em;
+    font-variation-settings:"opsz" 144,"SOFT" 30;
+  }
+  .deck h1 b{font-weight:800;font-style:italic;color:var(--accent)}
+  .deck .lede{
+    grid-column:1 / span 8;
+    font-size:19px;color:var(--ink-2);
+    max-width:62ch;
+  }
+  .deck .stamp{
+    grid-column:9 / span 4;
+    align-self:end;
+    border:1.5px solid var(--accent);
+    color:var(--accent);
+    padding:14px 16px;
+    font-family:'JetBrains Mono',monospace;
+    text-transform:uppercase;
+    font-size:10px;
+    letter-spacing:.22em;
+    transform:rotate(-1.5deg);
+    box-shadow:var(--shadow);
+    background:rgba(255,253,247,.6);
+  }
+  .stamp .big{display:block;font-size:13px;letter-spacing:.18em;margin-top:6px;color:var(--ink)}
+
+  /* TOP STATS RAIL */
+  .rail{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+    border-bottom:1px solid var(--rule);
+    margin-top:22px;
+  }
+  .rail .cell{
+    padding:18px 14px 16px;
+    border-right:1px dashed rgba(22,20,15,.25);
+    position:relative;
+  }
+  .rail .cell:last-child{border-right:none}
+  .rail .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+  .rail .v{font-family:'Fraunces',serif;font-weight:800;font-size:26px;margin-top:6px;letter-spacing:-.01em}
+  .rail .s{font-size:12px;color:var(--ink-2);margin-top:2px;font-family:'Inter Tight',sans-serif}
+
+  /* SECTION HEADERS */
+  section{margin-top:64px;scroll-margin-top:24px}
+  .section-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:end;
+    border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:26px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  }
+  .section-title{
+    font-family:'Fraunces',serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.02em;
+    font-variation-settings:"SOFT" 20;
+  }
+  .section-title i{font-weight:400;color:var(--ink-2);font-style:italic;font-size:24px;margin-left:10px}
+  .section-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+
+  /* SUMMARY GRID */
+  .grid-12{display:grid;grid-template-columns:repeat(12,1fr);gap:28px}
+  .col-7{grid-column:span 7}
+  .col-5{grid-column:span 5}
+  .col-6{grid-column:span 6}
+  .col-4{grid-column:span 4}
+  .col-8{grid-column:span 8}
+  .col-12{grid-column:span 12}
+  p{margin:0 0 12px}
+  .drop::first-letter{
+    font-family:'Fraunces',serif;font-weight:900;
+    font-size:84px;float:left;line-height:.85;padding:8px 10px 0 0;color:var(--accent);
+    font-variation-settings:"WONK" 1;
+  }
+
+  /* FACT CARD */
+  .factcard{
+    background:rgba(255,253,247,.7);
+    border:1px solid var(--rule);
+    padding:18px 20px;
+    box-shadow:var(--shadow);
+  }
+  .factcard h4{
+    margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2);
+    border-bottom:1px solid rgba(22,20,15,.2);padding-bottom:6px;
+  }
+  .factcard ul{margin:0;padding:0;list-style:none}
+  .factcard li{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:6px 0;border-bottom:1px dotted rgba(22,20,15,.18);font-size:14px}
+  .factcard li:last-child{border-bottom:none}
+  .factcard li b{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--ink-2);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* GLOSSARY */
+  .glossary{
+    background:linear-gradient(180deg, #efe6d2 0%, #e8dfc8 100%);
+    border:1px solid var(--rule);
+    padding:18px 22px;
+  }
+  .glossary h4{margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+  .glossary dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+  .glossary dt{font-family:'Fraunces',serif;font-weight:700;font-style:italic;color:var(--accent);font-size:14px;margin-top:6px}
+  .glossary dd{margin:0;font-size:13px;color:var(--ink-2)}
+
+  /* FINDINGS */
+  .findings{display:grid;gap:14px}
+  .finding{
+    display:grid;grid-template-columns:90px 1fr auto;gap:18px;
+    border:1px solid var(--rule);
+    background:rgba(255,253,247,.7);
+    padding:16px 18px;
+    position:relative;
+  }
+  .finding .sev{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    align-self:start;
+    padding:6px 8px;text-align:center;color:#fff;
+  }
+  .sev.red{background:var(--red)}
+  .sev.amber{background:var(--amber)}
+  .sev.green{background:var(--green)}
+  .sev.blue{background:var(--blue)}
+  .finding h3{
+    margin:0 0 4px;font-family:'Fraunces',serif;font-weight:800;font-size:20px;letter-spacing:-.01em;
+  }
+  .finding p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .finding .src{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+    align-self:start;white-space:nowrap;
+  }
+  .finding .why{
+    margin-top:8px;font-size:13px;color:var(--ink);
+    border-top:1px dotted rgba(22,20,15,.2);padding-top:8px
+  }
+  .finding .why b{color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-right:6px}
+
+  /* MONEY TABLE */
+  table.ledger{
+    width:100%;border-collapse:collapse;font-size:14px;
+    border-top:2px solid var(--rule);border-bottom:2px solid var(--rule);
+  }
+  .ledger th,.ledger td{
+    text-align:left;padding:10px 12px;border-bottom:1px dotted rgba(22,20,15,.25);
+    font-family:'Inter Tight',sans-serif;
+  }
+  .ledger th{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-2);border-bottom:1px solid var(--rule)}
+  .ledger td.num{font-family:'JetBrains Mono',monospace;text-align:right;font-variant-numeric:tabular-nums}
+  .ledger tr.total td{font-weight:700;background:rgba(160,122,26,.08);border-top:1px solid var(--rule)}
+  .ledger tr.sub td{font-weight:600;background:rgba(22,20,15,.04)}
+  .ledger .tag{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    letter-spacing:.16em;text-transform:uppercase;padding:2px 6px;border:1px solid currentColor;
+  }
+  .tag.r{color:var(--red)} .tag.a{color:var(--amber)} .tag.g{color:var(--green)} .tag.b{color:var(--blue)}
+
+  /* CHECKLIST */
+  .check{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .check .doc{
+    border:1px solid var(--rule);padding:14px 16px;background:rgba(255,253,247,.7);
+    display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;
+  }
+  .check .box{
+    width:20px;height:20px;border:1.5px solid var(--ink);margin-top:2px;position:relative;
+  }
+  .check .doc h5{margin:0 0 4px;font-family:'Fraunces',serif;font-weight:700;font-size:16px}
+  .check .doc p{margin:0;font-size:13px;color:var(--ink-2)}
+  .check .doc .why{font-size:11.5px;color:var(--accent);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.14em;margin-top:6px}
+
+  /* QUESTIONS */
+  .qcat{margin-top:22px}
+  .qcat h3{
+    font-family:'Fraunces',serif;font-weight:800;font-size:24px;margin:0 0 10px;
+    border-left:4px solid var(--accent);padding-left:12px;
+  }
+  .qcat ol{margin:0;padding:0;counter-reset:q;list-style:none}
+  .qcat li{
+    counter-increment:q;
+    display:grid;grid-template-columns:50px 1fr;gap:14px;
+    padding:10px 0;border-bottom:1px dotted rgba(22,20,15,.22);
+  }
+  .qcat li::before{
+    content:"Q." counter(q,decimal-leading-zero);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--accent);font-weight:700;
+  }
+  .qcat li .qtxt{font-size:15px;color:var(--ink)}
+  .qcat li .qtxt small{display:block;color:var(--ink-2);font-size:12px;margin-top:4px;font-family:'Inter Tight',sans-serif;font-style:italic}
+
+  /* NEGOTIATION */
+  .neg-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
+  .priceblock{
+    border:2px solid var(--ink);padding:24px;background:rgba(255,253,247,.85);
+    position:relative;box-shadow:var(--shadow);
+  }
+  .priceblock::before{
+    content:"OFFER ANALYSIS";position:absolute;top:-10px;left:18px;background:var(--paper);
+    padding:0 8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--accent);font-weight:700;
+  }
+  .priceblock h4{margin:0 0 4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+  .pricerow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:8px 0;border-bottom:1px dotted rgba(22,20,15,.2);font-size:14px}
+  .pricerow.big{font-size:22px;font-family:'Fraunces',serif;font-weight:700;padding:14px 0;border-bottom:2px solid var(--ink)}
+  .pricerow.big.target{color:var(--green)}
+  .pricerow .n{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+  .pricerow.add .n{color:var(--red)}
+  .pricerow.sub .n{color:var(--green)}
+
+  .scale{
+    margin-top:18px;
+    position:relative;height:80px;
+    border:1px solid var(--ink);background:linear-gradient(90deg, #b8d4a6 0%, #e6cf8a 45%, #d99b6b 75%, #c46a55 100%);
+  }
+  .scale .tick{position:absolute;top:0;bottom:0;width:1px;background:rgba(22,20,15,.4)}
+  .scale .label{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink);transform:translateX(-50%);}
+  .scale .label .v{display:block;font-weight:700;font-size:11px}
+  .scale .label .l{display:block;font-size:9px;color:var(--ink-2);text-transform:uppercase}
+  .scale .label.top{top:-26px} .scale .label.bot{bottom:-32px}
+  .scale .arrow{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:22px;color:var(--ink);font-weight:900}
+
+  .rationale{
+    background:rgba(255,253,247,.7);border:1px solid var(--rule);padding:18px 20px;
+  }
+  .rationale h4{margin:0 0 8px;font-family:'Fraunces',serif;font-weight:800;font-size:18px}
+  .rationale ul{margin:0;padding-left:18px}
+  .rationale li{margin:6px 0;font-size:14px}
+  .rationale li b{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-right:6px}
+
+  .pullquote{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:28px;line-height:1.25;color:var(--ink);
+    border-left:4px solid var(--accent);padding:6px 0 6px 22px;margin:24px 0;
+    font-variation-settings:"SOFT" 80;
+  }
+  .pullquote b{font-style:normal;font-weight:800;color:var(--accent)}
+
+  /* COLOPHON */
+  .colophon{
+    margin-top:80px;padding-top:18px;border-top:6px double var(--rule);
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+  }
+  .colophon p{margin:0}
+  .colophon .center{text-align:center}
+  .colophon .right{text-align:right}
+
+  /* TOC */
+  .toc{
+    margin-top:30px;
+    border:1px solid var(--rule);background:rgba(255,253,247,.6);padding:14px 18px;
+    display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+  }
+  .toc a{
+    color:var(--ink);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    padding:8px 6px;border-bottom:2px solid transparent;transition:.15s;
+  }
+  .toc a:hover{border-bottom-color:var(--accent);color:var(--accent)}
+  .toc a span{display:block;color:var(--accent);font-size:9px;margin-bottom:2px}
+
+  @media (max-width:980px){
+    .wrap{padding:24px 20px 80px}
+    .deck h1{font-size:44px}
+    .deck .stamp{grid-column:1 / -1;justify-self:start;transform:none;margin-top:8px}
+    .rail{grid-template-columns:repeat(2,1fr)}
+    .rail .cell{border-bottom:1px dashed rgba(22,20,15,.2)}
+    .neg-grid{grid-template-columns:1fr}
+    .check{grid-template-columns:1fr}
+    .glossary dl{grid-template-columns:1fr}
+    .finding{grid-template-columns:80px 1fr}
+    .finding .src{grid-column:2;margin-top:6px}
+    .toc{grid-template-columns:repeat(2,1fr)}
+    .section-title{font-size:30px}
+  }
+</style>
+</head>
+<body class="grain">
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font:500 12px/1 'Inter Tight',sans-serif;background:rgba(243,237,226,.92);border:1px solid #1a1814;padding:6px 10px;border-radius:4px;">
+  <strong>EN</strong> · <a href="es/" style="color:#9b2615;text-decoration:none;">ES</a>
+</div>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="mh-left">Vol. I · No. 1 · Confidential</div>
+    <div class="mh-title">The <em>Buyer's</em> Dossier</div>
+    <div class="mh-right">Ludwigsburg · Eglosheim</div>
+  </div>
+
+  <div class="deck">
+    <h1>A 1971 high-rise<br/>flat priced at <b>€299,000</b>—<br/>here is what the<br/>paperwork actually says.</h1>
+    <p class="lede">An independent, plain-English read of <span class="mono">15</span> documents the broker handed over for the apartment at <b>Pleidelsheimer Str. 3, 71634 Ludwigsburg-Eglosheim</b>. Prepared for Nithin — a non-German buyer — so the German terms, the WEG politics and the numbers all sit on one page.</p>
+    <div class="stamp">
+      Prepared for<br/>
+      <span class="big">NITHIN · EXPAT BUYER</span>
+      As of 03 June 2026
+    </div>
+  </div>
+
+  <!-- TOP RAIL -->
+  <div class="rail">
+    <div class="cell"><div class="k">Asking price</div><div class="v">€299,000</div><div class="s">+ €20–30k renovation on buyer</div></div>
+    <div class="cell"><div class="k">All-in cost</div><div class="v">€319–329k</div><div class="s">before notary, tax, agent</div></div>
+    <div class="cell"><div class="k">Monthly carry</div><div class="v">€575</div><div class="s">Hausgeld + reserve + heating</div></div>
+    <div class="cell"><div class="k">Building age</div><div class="v">1971</div><div class="s">14-storey, 48 apartments</div></div>
+    <div class="cell"><div class="k">Energy class</div><div class="v">~C</div><div class="s">81 kWh/m²a final · certificate expires 09/2027</div></div>
+    <div class="cell"><div class="k">Reserve / unit</div><div class="v">~€3.1k</div><div class="s">low for a 1971 high-rise</div></div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc ui">
+    <a href="#summary"><span>§ 01</span>The property</a>
+    <a href="#flags"><span>§ 02</span>Red flags</a>
+    <a href="#money"><span>§ 03</span>Money &amp; reserves</a>
+    <a href="#missing"><span>§ 04</span>Missing docs</a>
+    <a href="#questions"><span>§ 05</span>Broker questions</a>
+    <a href="#negotiate"><span>§ 06</span>Negotiation</a>
+  </nav>
+
+  <!-- §1 SUMMARY -->
+  <section id="summary">
+    <header class="section-head">
+      <div class="section-num">§ 01</div>
+      <h2 class="section-title">The property, in plain English <i>— what you are actually buying</i></h2>
+      <div class="section-meta">Sources · Baubeschreibung · Grundbuch · Teilungserklärung · Energieausweis</div>
+    </header>
+
+    <div class="grid-12">
+      <div class="col-7">
+        <p class="drop">You are looking at one apartment inside a <b>14-storey concrete high-rise from 1971</b>, built by Hausbau Wüstenrot in the Eglosheim district of Ludwigsburg (Stuttgart commuter belt). The block contains <span class="mono">48 apartments</span> across multiple sizes — 2½, 3½ and 4½ rooms. Heating and hot water come from <em>Fernwärme</em> (district heating). There are two passenger lifts, a basement storage cellar for each flat, and a separately-organised underground garage.</p>
+
+        <p>The seller is not a single private owner — it is the <b>community of heirs (Erbengemeinschaft) of Mr. Georg Bodner</b>, who died in August 2024. His widow Sigrid is in a nursing home, and her three daughters (Renate Schugt, Dagmar Buck, Martina Bodner) inherited his half-share. Any sale needs <em>every heir's</em> signature plus the consent of the WEG administrator (per §12 WEG — though that restriction was lifted by owner resolution in 2008, so administrator consent is in practice not required).</p>
+
+        <p>The package includes <b>parking space No. 44</b> in the underground garage (a separate WEG, Pleidelsheimer Str. 11). The garage is currently <b>rented out</b> to a third party (Mr. Truschinski) for €50/month on an indefinite tenancy that automatically ends "on sale" — so as the buyer you inherit a tenant you will need to terminate.</p>
+
+        <p class="pullquote">"For sale (<em>Veräußerung</em>) of the residential ownership, the consent of the administrator is required" — <b>this restriction was lifted in 2008.</b> Good. One less veto.</p>
+
+        <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:800;margin:18px 0 6px;letter-spacing:-.01em">Which apartment exactly?</h3>
+        <p>Documents are not perfectly consistent. The <b>Grundbuch (sheet 10799)</b> places the unit on the <b>8th upper floor, left</b>, with a <b>26/1000 co-ownership share (MEA)</b> — pointing to one of the larger ≈98 m² 4½-room units. The Wirtschaftsplan 2026 confirms the 26/1000 MEA. <em>However</em>, a separate Wüstenrot reserve letter labels owner-no. 1003201 as "8th floor, right, 20/1000" — that conflicts. <b>Get this nailed down before signing</b> (see §02 flag 09).</p>
+      </div>
+
+      <div class="col-5">
+        <div class="factcard">
+          <h4>Key facts at a glance</h4>
+          <ul>
+            <li><b>Address</b><span>Pleidelsheimer Str. 3, 71634 Ludwigsburg-Eglosheim</span></li>
+            <li><b>Year built</b><span>1971 (heat generator also 1971)</span></li>
+            <li><b>Building</b><span>14-storey high-rise, 48 apartments, 2 lifts</span></li>
+            <li><b>This unit</b><span>8th upper floor (per Grundbuch), ≈ 4½-room, ~95–98 m² (to verify)</span></li>
+            <li><b>MEA share</b><span>26 / 1000</span></li>
+            <li><b>Garage</b><span>Space No. 44, underground (separate WEG)</span></li>
+            <li><b>Heating</b><span>District heating (Fernwärme), central HW</span></li>
+            <li><b>Ventilation</b><span>Natural (windows). No mechanical/A-C system; split AC now permitted by 2025 resolution</span></li>
+            <li><b>Energy</b><span>81 kWh/m²·a final · 106 primary · consumption-based certificate · valid until <span class="mono">18.09.2027</span></span></li>
+            <li><b>Land charge</b><span><span class="mono">€40,903.35</span> Grundschuld to Wüstenrot from 1972, still in Abt. III — almost certainly long repaid but <em>not cancelled</em></span></li>
+            <li><b>Easements</b><span>City of Ludwigsburg has right-of-way + no-combustion-installations restriction (both standard for the estate)</span></li>
+            <li><b>Administrator</b><span>Die Immobilienverwalter GmbH (took over 01/2025, 3-year term to 12/2027)</span></li>
+          </ul>
+        </div>
+
+        <div class="glossary" style="margin-top:18px">
+          <h4>Short German glossary</h4>
+          <dl>
+            <dt>WEG</dt><dd>The condominium owners' association — every flat owner is automatically a member.</dd>
+            <dt>Teilungserklärung</dt><dd>The "constitution" of the building: how it is divided into units, what each owner owns, who pays what.</dd>
+            <dt>Grundbuch</dt><dd>Land register — the definitive record of ownership, mortgages and easements.</dd>
+            <dt>MEA (Miteigentumsanteil)</dt><dd>Your slice of the whole building, in thousandths. Most cost shares scale by this.</dd>
+            <dt>Hausgeld</dt><dd>Monthly service charge to the WEG — running costs + reserve contribution.</dd>
+            <dt>Erhaltungsrücklage</dt><dd>The collective maintenance reserve. The shared piggy bank for the roof, lifts, façade.</dd>
+            <dt>Sonderumlage</dt><dd>A one-off special levy when the reserve is not enough. <b>What you fear.</b></dd>
+            <dt>Wirtschaftsplan</dt><dd>The WEG's annual budget — sets your monthly advance payment.</dd>
+            <dt>Eigentümerversammlung</dt><dd>The annual owners' meeting; resolutions are binding.</dd>
+            <dt>Erbengemeinschaft</dt><dd>Community of heirs — every heir must sign together.</dd>
+            <dt>Energieausweis</dt><dd>Energy certificate (mandatory at sale; must be shown to buyer).</dd>
+            <dt>Grundschuld</dt><dd>Land charge — like a mortgage entry, even after the loan is paid it stays until cancelled.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §2 RED FLAGS -->
+  <section id="flags">
+    <header class="section-head">
+      <div class="section-num">§ 02</div>
+      <h2 class="section-title">Findings &amp; red flags <i>— what the documents try not to shout</i></h2>
+      <div class="section-meta">12 findings · severity-coded</div>
+    </header>
+
+    <div class="findings">
+
+      <div class="finding">
+        <div class="sev red">Critical</div>
+        <div>
+          <h3>01 · Active lawsuit against the roofer (GT Bedachung)</h3>
+          <p>The WEG is suing the roofing contractor "GT Bedachungen" before the Regional Court (LG Stuttgart). It first surfaces in the 2023 minutes and is still listed as "open" in the November 2025 minutes — meaning the roof has had problems serious enough to litigate, and the outcome is not yet known.</p>
+          <p class="why"><b>Why it matters</b>This is a flat roof (warm roof, gravel ballast) on a 14-storey block. Roof failures are six-figure events. If the WEG loses or only partially recovers, expect a <em>Sonderumlage</em> (special levy) — and you would inherit your 26/1000 share of it.</p>
+        </div>
+        <div class="src">EV 2023 · EV 2024 · EV 2025</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev red">Critical</div>
+        <div>
+          <h3>02 · 1971 construction — asbestos-cement drainage piping in the spec</h3>
+          <p>The original <em>Baubeschreibung</em> (construction specification, signed 8.10.1971) lists the roof drains and internal drainage piping as <b>asbestos-cement</b> ("Dachabläufe mit innenliegender Regenwasserführung in Asbestzement"). This was standard for the era but is now a known liability.</p>
+          <p class="why"><b>Why it matters</b>Asbestos-cement pipework is generally safe while undisturbed, but any plumbing renovation, vertical-stack repair, or building modernisation triggers special handling, disposal and worker-protection costs. Ask whether stacks have been replaced.</p>
+        </div>
+        <div class="src">Baubeschreibung 1971</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev red">Critical</div>
+        <div>
+          <h3>03 · Owners <em>refused</em> to discharge the management two years running</h3>
+          <p>At the 2024 meeting the owners <b>rejected discharge of Wüstenrot</b> (the long-time manager) for FY2023 by 23–2. They also rejected the 2023 demands for back-payments (23–3) and refused to reappoint Wüstenrot (23–2). A brand-new administrator (<em>Die Immobilienverwalter GmbH</em>) took over on 1 Jan 2025 — only one year of track record so far.</p>
+          <p class="why"><b>Why it matters</b>"Refusal of discharge" is the WEG's way of saying <em>we don't trust the books</em>. Combined with the 2024 statement only being finalised in October 2025 (very late), there has been administrative turbulence. The new manager seems competent (November 2025 minutes are clean and unanimous) but the underlying disputes about the 2023 numbers may not be resolved.</p>
+        </div>
+        <div class="src">EV 2024 Teil 2 · EV 2025</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">High</div>
+        <div>
+          <h3>04 · Maintenance reserve is thin for a 1971 high-rise</h3>
+          <p>End-of-year reserve balance (31.12.2023): <span class="mono">€147,892</span> across 48 apartments = <b>~€3,080 per unit</b>. The 2026 annual allocation is <span class="mono">€42,024/year</span> — about €1,093 per flat at your MEA.</p>
+          <p class="why"><b>Why it matters</b>A 1971 high-rise with a flat roof, two lifts, a district-heating transfer station, an emergency power generator and an RWA smoke-extraction system has 6-figure capital items waiting in line (lift modernisation alone is €80–150k per shaft; façade refurbishment can be €500k+). €3k per unit is a cushion, not a war chest. Any of the items in §03 lands as a special levy.</p>
+        </div>
+        <div class="src">Rücklagenentwicklung · WP 2026</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">High</div>
+        <div>
+          <h3>05 · Energy certificate is consumption-based and expires Sept 2027</h3>
+          <p>The certificate (Minol, 18.09.2017) is a <em>Verbrauchsausweis</em> (consumption-based), not a demand-based one. Final-energy value <span class="mono">81 kWh/m²·a</span>, primary <span class="mono">106</span>. Modernisation recommendations: check heating system, check roof insulation, check external walls, windows, basement ceiling — i.e. <b>everything</b>, but no checkboxes are ticked.</p>
+          <p class="why"><b>Why it matters</b>The certificate expires before you could realistically rent out or resell — the seller has a duty to provide a valid one at sale, but a new one will likely come in worse under the post-2024 GEG (Building Energy Act) rules. Federal climate-law trajectory (mandatory thermal upgrades, heating-system replacement, façade insulation) creates a clear medium-term capex risk for the WEG.</p>
+        </div>
+        <div class="src">Energieausweis 2017</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">High</div>
+        <div>
+          <h3>06 · Sale by an Erbengemeinschaft — three heirs must all sign</h3>
+          <p>Ownership now sits half with Sigrid Bodner and half with the community of heirs of Georg Bodner (his three daughters). Per Grundbuch entry of 07.03.2025.</p>
+          <p class="why"><b>Why it matters</b>Erbengemeinschaft sales are slower, can collapse if one heir disagrees on price, and require fresh certificates of inheritance to be presented at the notary. Insist on a sale-readiness confirmation from the notary <em>before</em> you commit to financing.</p>
+        </div>
+        <div class="src">Grundbuch Abt. I, Nr. 3</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">High</div>
+        <div>
+          <h3>07 · €40,903 Grundschuld from 1972 still on the title</h3>
+          <p>Abteilung III (Section III) shows a 12% land charge in favour of Wüstenrot Bausparkasse, entered 14.12.1972 and never cancelled. The original mortgage is almost certainly paid off — but the entry is still legally there.</p>
+          <p class="why"><b>Why it matters</b>You cannot accept the property with this entry. The seller must obtain a <em>Löschungsbewilligung</em> (cancellation consent) from Wüstenrot at their cost, and the notary must register the deletion (or pre-fund deletion from sale proceeds). Standard process, but it must actually happen — put it explicitly into the purchase contract.</p>
+        </div>
+        <div class="src">Grundbuch Abt. III, Nr. 2</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">Medium</div>
+        <div>
+          <h3>08 · Hausgeld in arrears for some units</h3>
+          <p>The November 2025 minutes record arrears for three units: <span class="mono">WE19 €9.51 · WE21 €648.65 · WE23 €229.55</span>. Small amounts overall, but a habitual non-payer (WE21) is a recurring drag on the community.</p>
+          <p class="why"><b>Why it matters</b>Persistent debtors mean someone else fronts their share of running costs; in extreme cases the WEG carries unrecoverable losses. Worth asking who WE21 is and what enforcement steps the new manager is taking.</p>
+        </div>
+        <div class="src">EV 2025 TOP 3</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">Medium</div>
+        <div>
+          <h3>09 · Document inconsistency on which apartment this actually is</h3>
+          <p>Grundbuch 10799 = 26/1000 MEA, 8th upper floor LEFT. Wirtschaftsplan 2026 = 26 MEA (matches). The 2025 Wüstenrot reserve letter (owner-no. 1003201) says 20 MEA, 8th floor RIGHT. Either the reserve letter is for a different/older property record, or someone copied the wrong row.</p>
+          <p class="why"><b>Why it matters</b>"Which exact unit" is the single most important fact in the contract. Demand a written reconciliation from the broker, ideally with a stamped current Grundbuchauszug (less than 4 weeks old) and the matching Aufteilungsplan page for unit no. 32 (the partition-plan number cited in the Grundbuch).</p>
+        </div>
+        <div class="src">Grundbuch · WP 2026 · Rücklagenentwicklung</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev amber">Medium</div>
+        <div>
+          <h3>10 · No fibre to the home — vote was rejected</h3>
+          <p>At the 2025 meeting, fibre rollout by SWLB at €99/unit was put to a vote and <b>rejected 5–8 (4 abstentions)</b>. The building stays on the existing Vodafone collective contract (€8.40/month per owner via Hausgeld).</p>
+          <p class="why"><b>Why it matters</b>For an expat working from home, this is a quality-of-life issue. You can usually still order an individual FTTH connection, but it depends on building wiring and may need a circulation resolution. Confirm what speed the current Vodafone line delivers in this specific flat.</p>
+        </div>
+        <div class="src">EV 2025 TOP 13</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev green">Positive</div>
+        <div>
+          <h3>11 · Split-AC now permitted, new house rules adopted, fresh management</h3>
+          <p>The 2025 meeting unanimously adopted brand-new house rules (replacing the 1996 set) and approved (16–0–1) a framework allowing every owner to install a split air-conditioner under defined conditions — useful for an 8th-floor flat in southern Germany's warming summers. Garden maintenance and tree-pruning are budgeted (€6,574). The new administrator received unanimous discharge.</p>
+          <p class="why"><b>Why it matters</b>The WEG is functional, the new manager is delivering, and you have explicit permission to install AC without having to fight a separate vote. Net positive.</p>
+        </div>
+        <div class="src">EV 2025 TOP 11 / 12 / 14</div>
+      </div>
+
+      <div class="finding">
+        <div class="sev blue">Neutral</div>
+        <div>
+          <h3>12 · Garage tenant in place — terminate before completion</h3>
+          <p>Parking space 44 is rented to Mr. Truschinski (also a resident) for €50/month, contract explicitly tied to "until the sale". Notice period: by the 3rd working day of a month, ending the month after next.</p>
+          <p class="why"><b>Why it matters</b>Easy to handle — but the seller should issue the termination, not you, so that the parking space hands over vacant on closing day. Put this in the purchase contract.</p>
+        </div>
+        <div class="src">Mietvertrag Garage</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- §3 MONEY -->
+  <section id="money">
+    <header class="section-head">
+      <div class="section-num">§ 03</div>
+      <h2 class="section-title">Money &amp; reserves <i>— what you will pay every month and why</i></h2>
+      <div class="section-meta">Sources · Wirtschaftsplan 2026 · Rücklagenentwicklung · EV 2024/2025</div>
+    </header>
+
+    <div class="grid-12">
+
+      <div class="col-7">
+        <h3 style="font-family:'Fraunces',serif;font-weight:800;font-size:22px;margin:0 0 10px;letter-spacing:-.01em">Monthly carrying cost (apartment + garage)</h3>
+        <table class="ledger">
+          <thead>
+            <tr><th>Line item</th><th>Per month €</th><th>Per year €</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hausgeld (WEG service charge)</td><td class="num">317.48</td><td class="num">3,809.77</td><td><span class="tag b">MEA 26/1000</span></td></tr>
+            <tr><td>Reserve allocation (Erhaltungsrücklage)</td><td class="num">91.05</td><td class="num">1,092.62</td><td><span class="tag g">Builds equity in WEG piggy</span></td></tr>
+            <tr><td>Heating + hot water (district heating)</td><td class="num">121.31</td><td class="num">1,455.76</td><td>Fixed per HKA</td></tr>
+            <tr class="sub"><td>Apartment subtotal</td><td class="num">529.84</td><td class="num">6,358.15</td><td></td></tr>
+            <tr><td>Garage — Hausgeld</td><td class="num">14.70</td><td class="num">176.45</td><td>Parking space 44</td></tr>
+            <tr><td>Garage — Reserve</td><td class="num">30.00</td><td class="num">360.00</td><td>Lot 3 allocation</td></tr>
+            <tr class="sub"><td>Garage subtotal</td><td class="num">44.70</td><td class="num">536.45</td><td></td></tr>
+            <tr class="total"><td>TOTAL recurring cost to owner</td><td class="num">574.54</td><td class="num">6,894.60</td><td>before electricity, internet, insurance contents</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;font-size:13px;color:var(--ink-2);font-style:italic">When you let the apartment: roughly <span class="mono">€408</span>/month (Hausgeld + reserve) is "owner cost", the <span class="mono">€121</span> heating is normally recoverable from the tenant via the Betriebskostenabrechnung. The reserve contribution is <b>never</b> recoverable.</p>
+
+        <h3 style="font-family:'Fraunces',serif;font-weight:800;font-size:22px;margin:24px 0 10px;letter-spacing:-.01em">Where the WEG's money goes (2026 budget · whole building)</h3>
+        <table class="ledger">
+          <thead><tr><th>Cost block</th><th>Total €/yr</th><th>Comment</th></tr></thead>
+          <tbody>
+            <tr><td>Heating &amp; water (HKA-billed)</td><td class="num">68,000.90</td><td>Largest single line — district heating</td></tr>
+            <tr><td>Caretaker (Hausmeister)</td><td class="num">22,000.00</td><td>Onsite cleaning/upkeep</td></tr>
+            <tr><td>Building insurance</td><td class="num">20,000.00</td><td>For the whole 48-unit block</td></tr>
+            <tr><td>Common-area electricity</td><td class="num">6,000.00</td><td>Lifts, stairwell, basement</td></tr>
+            <tr><td>Lift operations</td><td class="num">9,500.00</td><td>2 lifts · maintenance + inspection</td></tr>
+            <tr><td>Maintenance expense (running)</td><td class="num">7,000.00</td><td>Small repairs — feels low for the building age</td></tr>
+            <tr><td>Manager fee (basic services)</td><td class="num">14,394.24</td><td>€299.88 per unit per year (~€25/mo)</td></tr>
+            <tr><td>Unforeseen costs (buffer)</td><td class="num">9,640.00</td><td>Discretionary cushion</td></tr>
+            <tr class="total"><td>Allocation to maintenance reserve</td><td class="num">42,024.00</td><td><span class="tag a">~€876/unit/year — needs to grow</span></td></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-5">
+        <div class="factcard">
+          <h4>Reserve fund snapshot</h4>
+          <ul>
+            <li><b>Balance 01.01.23</b><span>€134,414.21</span></li>
+            <li><b>+ Allocation 2023</b><span>€39,553.80</span></li>
+            <li><b>+ Interest (term deposit)</b><span>€245.57</span></li>
+            <li><b>− Capital gains tax</b><span>−€64.75</span></li>
+            <li><b>− Withdrawals 2023</b><span>−€26,302.85</span></li>
+            <li><b>= Balance 31.12.23</b><span><b>€147,845.98</b></span></li>
+            <li><b>Per unit (≈)</b><span>~€3,080</span></li>
+            <li><b>Your MEA share</b><span>€3,845.19</span></li>
+          </ul>
+        </div>
+
+        <div class="factcard" style="margin-top:18px">
+          <h4>Recent WEG resolutions you inherit</h4>
+          <ul>
+            <li><b>Manager</b><span>Die Immobilienverwalter GmbH, 01/2025 – 12/2027</span></li>
+            <li><b>House rules</b><span>New set effective 13.11.2025</span></li>
+            <li><b>Split AC</b><span>Permitted with conditions (statics, ≤49 dB(A), insurance, hidden outdoor unit)</span></li>
+            <li><b>Heat allocators</b><span>Switched to radio + smart-meter gateway (10-yr rental, water meters 6 yr) — 2023 resolution</span></li>
+            <li><b>Virtual meetings</b><span>Permitted within 3 yrs of 11/2025</span></li>
+            <li><b>Fibre</b><span>Rejected (8–5)</span></li>
+            <li><b>Vodafone Express contract</b><span>Maintained · €8.40/owner/month</span></li>
+            <li><b>Garden pruning + path</b><span>≤ €6,573.61 awarded (Gartengestaltung Muja)</span></li>
+            <li><b>Lawsuit roofer</b><span>Open — no provision booked</span></li>
+          </ul>
+        </div>
+
+        <p class="pullquote" style="font-size:22px;margin-top:18px">The reserve is <b>roughly one bad year of withdrawals deep.</b> That is the single number you should keep in your head.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- §4 MISSING DOCS -->
+  <section id="missing">
+    <header class="section-head">
+      <div class="section-num">§ 04</div>
+      <h2 class="section-title">Missing documents <i>— ask the broker for these before you offer</i></h2>
+      <div class="section-meta">Pre-contract due-diligence checklist</div>
+    </header>
+
+    <div class="check">
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>1 · Current Grundbuchauszug (under 4 weeks old)</h5>
+        <p>The one in your folder was retrieved 08.04.2026 — fine for now, but the notary will need a fresh one at signing.</p>
+        <div class="why">Confirms ownership, encumbrances, mortgage status</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>2 · Aufteilungsplan — pages showing this specific unit (No. 32 per Grundbuch)</h5>
+        <p>You only have the partition plan page for the garage. The apartment partition-plan page is missing — and it is the definitive drawing of <em>what walls are yours</em>.</p>
+        <div class="why">Defines Sondereigentum boundaries</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>3 · Full Teilungserklärung incl. Gemeinschaftsordnung</h5>
+        <p>You have Part I (the division into units). You need the <em>Gemeinschaftsordnung</em> (community rules) — the binding cost-distribution keys, voting rules, special-use rights.</p>
+        <div class="why">Defines what you pay vs. what the WEG pays</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>4 · Annual statement (Jahresabrechnung) 2024 — full version</h5>
+        <p>The 2025 minutes approve it but you only have the meeting summary. Ask for the full statement (your individual + total).</p>
+        <div class="why">Shows actual vs. budgeted spend — true cost benchmark</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>5 · Beschlusssammlung (resolution collection) — last 5 years minimum</h5>
+        <p>Required by §24 (7) WEG. Every binding resolution since the WEG was founded. Reveals special levies, capex history, disputes.</p>
+        <div class="why">Best source for hidden liabilities</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>6 · Building insurance certificate &amp; current contract</h5>
+        <p>€20,000/year of premium — but what is covered? Elemental damage? Glass? What is the deductible?</p>
+        <div class="why">Defines what you'd have to pay out of pocket</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>7 · Status &amp; pleadings of the GT Bedachung lawsuit</h5>
+        <p>Critical. Ask for the latest letter from the WEG's lawyer with the disputed amount, current procedural stage, and exposure if the claim fails.</p>
+        <div class="why">Quantifies the biggest single risk</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>8 · Lift inspection reports (TÜV) — last 2 cycles</h5>
+        <p>Two passenger lifts from 1971-era building. The next major modernisation is a 6-figure event.</p>
+        <div class="why">Predicts the next big special levy</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>9 · Heating system (Fernwärme transfer station) maintenance log + supply contract</h5>
+        <p>Fernwärme price varies wildly by city; Ludwigsburg's supplier and tariff matter for resale and for the GEG-2024 transition.</p>
+        <div class="why">Long-term energy cost &amp; climate-law exposure</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>10 · Asbestos / pollutants survey (Schadstoffgutachten), if any</h5>
+        <p>Given the asbestos-cement drainage spec and the 1971 construction. If none exists, that itself is a finding.</p>
+        <div class="why">Quantifies renovation surcharge</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>11 · Floor plan of the apartment + sqm-Berechnung (Wohnflächenberechnung)</h5>
+        <p>Strikingly absent. You need the official square-metre calculation to verify the price/m².</p>
+        <div class="why">€/m² is meaningless without it</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>12 · Energy certificate — confirmation that the seller will renew before completion</h5>
+        <p>Current one expires 18.09.2027. By law it must be valid at sale.</p>
+        <div class="why">Seller's legal obligation</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>13 · Erbschein + Vollmachten of all heirs</h5>
+        <p>The certificate of inheritance (Gemeinschaftlicher Erbschein, 03.12.2024) is referenced in the Grundbuch — ask for a copy + powers of attorney where heirs cannot attend signing.</p>
+        <div class="why">Confirms seller actually has authority to sell</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>14 · Pending Sonderumlagen / planned major works for 2026–2028</h5>
+        <p>Written confirmation from the new manager (Die Immobilienverwalter GmbH) that there is no special levy in the pipeline.</p>
+        <div class="why">If there is one, the buyer is liable from the moment of resolution</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>15 · Confirmation that there are no Hausgeld arrears on this unit</h5>
+        <p>Note the 2023 plausibility check shows a €166.48 receivable against Bodner. Get a clean Schufa-style statement: no outstanding charges as of completion.</p>
+        <div class="why">Arrears travel with the unit, not the seller</div>
+      </div></div>
+
+      <div class="doc"><div class="box"></div><div>
+        <h5>16 · Current Vodafone/multimedia connection details &amp; achievable internet speed</h5>
+        <p>Relevant given the fibre vote was rejected.</p>
+        <div class="why">Quality of life for a remote-working expat</div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <!-- §5 QUESTIONS -->
+  <section id="questions">
+    <header class="section-head">
+      <div class="section-num">§ 05</div>
+      <h2 class="section-title">Questions for the broker <i>— grouped for one conversation</i></h2>
+      <div class="section-meta">Walk in with this list · do not improvise</div>
+    </header>
+
+    <div class="qcat">
+      <h3>A · Legal &amp; ownership</h3>
+      <ol>
+        <li><div class="qtxt">Can you reconcile the discrepancy between the Grundbuch (8th floor LEFT, 26/1000) and the 2025 Wüstenrot reserve letter (8th floor RIGHT, 20/1000)? Which unit am I actually buying?<small>If they can't answer on the spot, do not progress to offer.</small></div></li>
+        <li><div class="qtxt">Have all three heirs (Renate Schugt, Dagmar Buck, Martina Bodner) and Sigrid Bodner formally agreed to the sale, and at this price? Who signs at the notary?</div></li>
+        <li><div class="qtxt">Will the seller arrange the cancellation of the 1972 Wüstenrot Grundschuld (€40,903.35) before, or at, completion — and bear the cost?</div></li>
+        <li><div class="qtxt">Are there any rights of first refusal (<em>Vorkaufsrechte</em>) — by the city, the tenant, or other owners?</div></li>
+        <li><div class="qtxt">The garage rental to Mr. Truschinski ends "on sale". Will the seller serve the termination notice now, so that I receive a vacant parking space at handover?</div></li>
+        <li><div class="qtxt">Is the apartment itself currently rented, or vacant? Provide the most recent utility bills (Strom, Wasser, Heizkostenabrechnung) to verify.</div></li>
+      </ol>
+    </div>
+
+    <div class="qcat">
+      <h3>B · Financial &amp; community</h3>
+      <ol>
+        <li><div class="qtxt">Are there any planned <em>Sonderumlagen</em> (special levies) resolved or under discussion for 2026–2028?</div></li>
+        <li><div class="qtxt">What is the current monetary value at stake in the GT Bedachung lawsuit, and what is counsel's assessment of the WEG's exposure if it loses?</div></li>
+        <li><div class="qtxt">Why did the owners refuse to discharge Wüstenrot for FY2023 — and is that dispute now resolved, or still live?</div></li>
+        <li><div class="qtxt">Will I receive the existing annual statements (Jahresabrechnungen) for 2022, 2023, 2024 in full?</div></li>
+        <li><div class="qtxt">What was the cumulative spend from the reserve over the last 5 years, and on what?</div></li>
+        <li><div class="qtxt">What are the manager's plans for raising the reserve allocation, given the building's age?</div></li>
+        <li><div class="qtxt">Are there any Hausgeld arrears outstanding on this unit at the proposed completion date?</div></li>
+      </ol>
+    </div>
+
+    <div class="qcat">
+      <h3>C · Structural &amp; technical</h3>
+      <ol>
+        <li><div class="qtxt">When was the flat roof last refurbished, and what is the warranty status — is the GT Bedachung work still under guarantee?</div></li>
+        <li><div class="qtxt">Have any of the original asbestos-cement drainage stacks been replaced? Where in the building, and at what cost?</div></li>
+        <li><div class="qtxt">When were the two lifts last fully modernised, and what is the current TÜV status?</div></li>
+        <li><div class="qtxt">When was the façade (vorgehängte Fassade, precast concrete elements) last inspected for de-bonding or spalling?</div></li>
+        <li><div class="qtxt">What is the state of the apartment's electrics — original 1971 wiring, or rewired? Fuse box modernised? RCD/FI protection?</div></li>
+        <li><div class="qtxt">What is the condition of the apartment's windows — still the original wooden composite (Holzverbund) windows, or replaced? U-value if known?</div></li>
+        <li><div class="qtxt">Is the bathroom layout original (linoleum + tile-on-screed) — i.e. does the €20–30k renovation budget realistically cover bathroom + kitchen + floors?</div></li>
+        <li><div class="qtxt">Has there ever been water damage in this unit (especially from the roof — given the lawsuit, or from a stack above)?</div></li>
+      </ol>
+    </div>
+
+    <div class="qcat">
+      <h3>D · Compliance &amp; future cost</h3>
+      <ol>
+        <li><div class="qtxt">A new <em>Energieausweis</em> will need to be issued before sale — will the seller provide it, and what does the latest building energy consumption look like (last 3 years)?</div></li>
+        <li><div class="qtxt">What is the WEG's plan for compliance with the GEG 2024 / Heizungsgesetz — is the district-heating supplier on a decarbonisation path?</div></li>
+        <li><div class="qtxt">Achievable internet speed at the unit on the current Vodafone connection — and could I install an individual fibre line if I pay myself?</div></li>
+        <li><div class="qtxt">Is the building covered by any heritage protection (Denkmalschutz) or facade-design constraints that would limit renovations or AC installation?</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- §6 NEGOTIATION -->
+  <section id="negotiate">
+    <header class="section-head">
+      <div class="section-num">§ 06</div>
+      <h2 class="section-title">Negotiation analysis <i>— what a fair counter-offer looks like</i></h2>
+      <div class="section-meta">Methodology · comparable adjustment + risk discount</div>
+    </header>
+
+    <div class="neg-grid">
+
+      <div class="priceblock">
+        <h4>Step 1 · Total cost to you at asking</h4>
+        <div class="pricerow"><span>Asking price</span><span class="n">€ 299,000</span></div>
+        <div class="pricerow add"><span>Renovation (your estimate, low)</span><span class="n">+ € 20,000</span></div>
+        <div class="pricerow add"><span>Renovation (your estimate, high)</span><span class="n">+ € 30,000</span></div>
+        <div class="pricerow add"><span>Notary &amp; Grundbuch (~1.5%)</span><span class="n">+ € 4,485</span></div>
+        <div class="pricerow add"><span>Grunderwerbsteuer BW (5.0%)</span><span class="n">+ € 14,950</span></div>
+        <div class="pricerow add"><span>Maklercourtage (3.57% incl. VAT, typical 50/50 split)</span><span class="n">+ € 10,675</span></div>
+        <div class="pricerow big"><span>Real all-in cost at asking</span><span class="n">€ 349k – 359k</span></div>
+
+        <h4 style="margin-top:24px">Step 2 · Risk-adjusted fair-value range</h4>
+        <div class="pricerow"><span>Comparable €/m² Ludwigsburg-Eglosheim, 1971 high-rise, unrenovated</span><span class="n">€2,700 – 3,100</span></div>
+        <div class="pricerow"><span>Apartment ≈ 95–98 m² (to verify)</span><span class="n">≈ 96 m²</span></div>
+        <div class="pricerow"><span>Indicative fair range before discounts</span><span class="n">€ 259k – 298k</span></div>
+        <div class="pricerow sub"><span>Discount · roof lawsuit (GT Bedachung)</span><span class="n">− € 8,000</span></div>
+        <div class="pricerow sub"><span>Discount · thin reserve fund (capex risk)</span><span class="n">− € 5,000</span></div>
+        <div class="pricerow sub"><span>Discount · asbestos-cement stacks (latent)</span><span class="n">− € 4,000</span></div>
+        <div class="pricerow sub"><span>Discount · Erbengemeinschaft / motivated seller</span><span class="n">− € 6,000</span></div>
+        <div class="pricerow sub"><span>Discount · Energieausweis renewal + GEG capex trajectory</span><span class="n">− € 4,000</span></div>
+        <div class="pricerow big target"><span>Target net price to seller</span><span class="n">€ 265k – 275k</span></div>
+      </div>
+
+      <div>
+        <div class="rationale">
+          <h4>How to play it — a three-step offer</h4>
+          <ul>
+            <li><b>Opening</b>Offer <span class="mono">€255,000</span>. Anchor low. Lead with the documented red flags (roof lawsuit, asbestos spec, thin reserve), not with personal preference. Frame it as a buyer who has done the homework.</li>
+            <li><b>Negotiation room</b>Walk-away ceiling: <span class="mono">€280,000</span>. Above this, total all-in (incl. €25k renovation + ancillary) clears €330k — at which point new-build or fully renovated alternatives in the area compete on equal footing.</li>
+            <li><b>Realistic landing</b><span class="mono">€270,000 – €275,000</span>. A €24–29k discount from asking is consistent with: <em>(a)</em> the Erbengemeinschaft's need to liquidate, <em>(b)</em> the documented capex pipeline, and <em>(c)</em> the building's underlying age.</li>
+            <li><b>Non-price terms to extract</b>Garage tenant terminated by seller pre-completion · 1972 Grundschuld cancellation pre-funded by seller · current Energieausweis renewed at seller's cost · written confirmation no Sonderumlage planned · seller indemnity for the GT Bedachung outcome up to a capped amount.</li>
+          </ul>
+        </div>
+
+        <div class="scale" style="margin-top:32px;margin-bottom:50px">
+          <div class="tick" style="left:0%"></div>
+          <div class="tick" style="left:25%"></div>
+          <div class="tick" style="left:50%"></div>
+          <div class="tick" style="left:75%"></div>
+          <div class="tick" style="left:100%"></div>
+
+          <div class="label top" style="left:0%"><span class="l">Opening</span><span class="v">€255k</span></div>
+          <div class="label top" style="left:43%"><span class="l">Realistic landing</span><span class="v">€270–275k</span></div>
+          <div class="label top" style="left:75%"><span class="l">Walk-away ceiling</span><span class="v">€280k</span></div>
+          <div class="label top" style="left:100%"><span class="l">Asking</span><span class="v">€299k</span></div>
+
+          <div class="arrow" style="left:46%">▼</div>
+
+          <div class="label bot" style="left:0%"><span class="l">Buyer paradise</span></div>
+          <div class="label bot" style="left:50%"><span class="l">Fair zone</span></div>
+          <div class="label bot" style="left:100%"><span class="l">Seller paradise</span></div>
+        </div>
+
+        <div class="rationale">
+          <h4>Three things <em>not</em> to do</h4>
+          <ul>
+            <li><b>Do not</b>commit before the unit identity (left vs. right, 20 vs. 26 MEA) is reconciled in writing. This is the single biggest contract risk.</li>
+            <li><b>Do not</b>accept a purchase contract that does not explicitly transfer the seller's share of the maintenance reserve to you at completion (under §10 (7) WEG / new WEMoG it stays with the unit, but the contract should reflect it).</li>
+            <li><b>Do not</b>let the broker pressure you with "another buyer is interested". Six-figure decisions deserve seven days of reflection. The Erbengemeinschaft cannot easily find another buyer at this price either — time is on your side.</li>
+          </ul>
+        </div>
+
+        <p class="pullquote">If the seller refuses to move below <b>€285k</b>, walk away. The numbers stop working — and the documents tell you why.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <p>Independent analysis · no fee · no agency</p>
+    <p class="center">Prepared for Nithin · expat buyer · Ludwigsburg</p>
+    <p class="right">15 source documents reviewed · 03 June 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
