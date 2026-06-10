@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bauhofstraße 9 — Acquisition Risk Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f1ece0;
+    --paper-2:#e9e2d2;
+    --ink:#1c1813;
+    --ink-soft:#4a4135;
+    --ink-faint:#8a7d68;
+    --line:#cbbfa6;
+    --oxblood:#7c2128;
+    --oxblood-bright:#a02d35;
+    --ochre:#b67611;
+    --forest:#3d5a3a;
+    --slate:#4f5d6e;
+    --crit:#7c2128;
+    --high:#b04a13;
+    --med:#9a7a10;
+    --low:#3d5a3a;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 18px 40px -28px rgba(28,24,19,.55);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% -5%, rgba(182,118,17,.07), transparent 38%),
+      radial-gradient(circle at 90% 8%, rgba(124,33,40,.06), transparent 32%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-optical-sizing:auto;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+  /* ---------- masthead ---------- */
+  header.masthead{padding:46px 0 30px;border-bottom:3px double var(--ink);}
+  .kicker{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .kicker .stamp{
+    color:var(--oxblood);border:1.5px solid var(--oxblood);border-radius:3px;
+    padding:4px 10px;transform:rotate(-2.2deg);font-weight:700;letter-spacing:.18em;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(38px,6.6vw,78px);
+    line-height:.96;letter-spacing:-.015em;margin:26px 0 6px;
+  }
+  h1 em{font-style:italic;color:var(--oxblood);font-weight:500;}
+  .subhead{
+    font-size:20px;color:var(--ink-soft);max-width:60ch;font-style:italic;
+    margin:0 0 22px;
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:8px 26px;font-family:"JetBrains Mono",monospace;
+    font-size:12px;letter-spacing:.04em;color:var(--ink-faint);text-transform:uppercase;
+  }
+  .meta-row b{color:var(--ink);font-weight:500;}
+
+  /* ---------- verdict band ---------- */
+  .verdict{
+    margin:34px 0 12px;display:grid;grid-template-columns:1.35fr 1fr;gap:0;
+    border:1.5px solid var(--ink);background:var(--paper-2);box-shadow:var(--shadow);
+  }
+  .verdict .v-left{padding:30px 34px;border-right:1.5px solid var(--ink);}
+  .verdict .v-right{padding:30px 34px;display:flex;flex-direction:column;justify-content:center;gap:14px;}
+  .v-label{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+  .v-left p{margin:0;font-size:19px;}
+  .v-left strong{color:var(--oxblood);}
+  .price-line{display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-family:"JetBrains Mono",monospace;}
+  .price-line .lab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+  .price-line .num{font-size:24px;font-weight:700;}
+  .price-line.ask .num{color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:1.5px;}
+  .price-line.target .num{color:var(--forest);font-size:30px;}
+  .price-line.delta .num{color:var(--oxblood-bright);}
+
+  /* ---------- section headers ---------- */
+  section{padding:52px 0 10px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;border-bottom:1px solid var(--line);padding-bottom:10px;}
+  .sec-num{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--oxblood);font-weight:700;letter-spacing:.1em;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(26px,3.4vw,38px);margin:0;letter-spacing:-.01em;}
+  .sec-intro{color:var(--ink-soft);max-width:72ch;margin:14px 0 26px;font-size:18px;}
+
+  /* ---------- metrics strip ---------- */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);background:rgba(255,255,255,.25);}
+  .metric{padding:22px 20px;border-right:1px solid var(--line);}
+  .metric:last-child{border-right:none;}
+  .metric .m-val{font-family:"Fraunces",serif;font-size:34px;font-weight:600;line-height:1;letter-spacing:-.02em;}
+  .metric .m-val small{font-size:16px;color:var(--ink-faint);font-weight:400;}
+  .metric .m-lab{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px;}
+  .metric.warn .m-val{color:var(--oxblood);}
+
+  /* ---------- waterfall ---------- */
+  .waterfall{border:1.5px solid var(--ink);background:var(--paper-2);padding:8px 0;box-shadow:var(--shadow);}
+  .wf-row{display:grid;grid-template-columns:34px 1fr 150px 132px;align-items:center;gap:14px;padding:13px 26px;border-bottom:1px solid rgba(203,191,166,.6);}
+  .wf-row:last-child{border-bottom:none;}
+  .wf-row .wf-i{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);}
+  .wf-row .wf-label{font-size:16.5px;}
+  .wf-row .wf-label span{display:block;font-size:12.5px;color:var(--ink-faint);font-style:italic;}
+  .wf-bar-wrap{height:9px;background:rgba(124,33,40,.12);border-radius:2px;overflow:hidden;}
+  .wf-bar{height:100%;background:linear-gradient(90deg,var(--oxblood),var(--oxblood-bright));transform-origin:left;}
+  .wf-amt{font-family:"JetBrains Mono",monospace;font-size:17px;text-align:right;font-weight:500;color:var(--oxblood-bright);}
+  .wf-row.head{background:transparent;border-bottom:1.5px solid var(--ink);}
+  .wf-row.head div{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+  .wf-row.total{background:rgba(61,90,58,.1);border-top:1.5px solid var(--ink);}
+  .wf-row.total .wf-label{font-family:"Fraunces",serif;font-size:21px;font-weight:600;}
+  .wf-row.total .wf-amt{color:var(--forest);font-size:20px;font-weight:700;}
+  .wf-row.anchor{background:rgba(28,24,19,.04);}
+  .wf-row.anchor .wf-label,.wf-row.anchor .wf-amt{font-family:"Fraunces",serif;font-size:19px;font-weight:600;color:var(--ink);}
+
+  /* ---------- risk register ---------- */
+  .risks{display:grid;gap:20px;}
+  .risk{
+    border:1px solid var(--line);background:rgba(255,255,255,.32);
+    border-left:5px solid var(--med);box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1fr;overflow:hidden;
+  }
+  .risk.crit{border-left-color:var(--crit);}
+  .risk.high{border-left-color:var(--high);}
+  .risk.med{border-left-color:var(--med);}
+  .risk.low{border-left-color:var(--low);}
+  .risk-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:22px 26px 6px;}
+  .risk-id{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);letter-spacing:.1em;}
+  .risk h3{font-family:"Fraunces",serif;font-weight:600;font-size:23px;line-height:1.18;margin:6px 0 0;letter-spacing:-.01em;flex:1;}
+  .sev{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px;border-radius:3px;white-space:nowrap;font-weight:700;align-self:flex-start;}
+  .sev.crit{background:var(--crit);color:#f7ede0;}
+  .sev.high{background:var(--high);color:#fdf3e6;}
+  .sev.med{background:var(--med);color:#fdf6df;}
+  .sev.low{background:var(--low);color:#eef4ec;}
+  .risk-body{padding:6px 26px 22px;}
+  .risk-body p{margin:10px 0 0;font-size:17px;}
+  .finding{color:var(--ink);}
+  .why{color:var(--ink-soft);}
+  .risk-foot{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);align-items:center;}
+  .src{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-faint);background:var(--paper-2);border:1px solid var(--line);padding:3px 9px;border-radius:3px;}
+  .lever{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--forest);font-weight:700;}
+  .lever::before{content:"▸ NEGOTIATION ";letter-spacing:.14em;color:var(--ink-faint);font-weight:400;}
+
+  /* ---------- requests / gaps ---------- */
+  .gaps{border:1.5px dashed var(--oxblood);background:rgba(124,33,40,.045);padding:26px 30px;}
+  .gaps ul{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 30px;}
+  .gaps li{padding-left:26px;position:relative;font-size:16.5px;}
+  .gaps li::before{content:"☐";position:absolute;left:0;top:0;color:var(--oxblood);font-size:18px;}
+  .gaps li b{font-weight:600;}
+
+  /* talking points */
+  .points{counter-reset:pt;display:grid;gap:14px;}
+  .point{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .point::before{counter-increment:pt;content:counter(pt,decimal-leading-zero);font-family:"Fraunces",serif;font-size:30px;font-weight:600;color:var(--oxblood);line-height:1;}
+  .point p{margin:0;font-size:17px;}
+  .point p b{font-weight:600;}
+
+  footer{margin-top:60px;border-top:3px double var(--ink);padding:30px 0 70px;}
+  footer .disc{font-size:13.5px;color:var(--ink-faint);max-width:90ch;font-style:italic;line-height:1.6;}
+  footer .sign{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:18px;}
+
+  a.jump{color:var(--oxblood);text-decoration:none;border-bottom:1px solid var(--line);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  @media (max-width:780px){
+    body{font-size:17px;}
+    .wrap{padding:0 20px;}
+    .verdict{grid-template-columns:1fr;}
+    .verdict .v-left{border-right:none;border-bottom:1.5px solid var(--ink);}
+    .metrics{grid-template-columns:1fr 1fr;}
+    .metric:nth-child(2){border-right:none;}
+    .metric:nth-child(1),.metric:nth-child(2){border-bottom:1px solid var(--line);}
+    .wf-row{grid-template-columns:24px 1fr 96px;}
+    .wf-bar-wrap{display:none;}
+    .gaps ul{grid-template-columns:1fr;}
+    .point{grid-template-columns:36px 1fr;}
+  }
+  @media print{
+    body{background:#fff;font-size:12px;}
+    body::before{display:none;}
+    .reveal{opacity:1;transform:none;}
+    .risk,.verdict,.waterfall,.metrics{box-shadow:none;}
+    section{padding:18px 0 4px;break-inside:avoid;}
+    .risk{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font:500 12px/1 'JetBrains Mono',monospace;background:rgba(241,236,224,.92);border:1px solid #1c1813;padding:6px 10px;border-radius:4px;letter-spacing:.08em;">
+  <strong>EN</strong> · <a href="es/" style="color:#7c2128;text-decoration:none;">ES</a>
+</div>
+<div class="wrap">
+
+  <!-- ===================== MASTHEAD ===================== -->
+  <header class="masthead">
+    <div class="kicker">
+      <span>Acquisition Due-Diligence · Eigentumswohnung</span>
+      <span class="stamp">Confidential — for Nithin</span>
+    </div>
+    <h1>Bauhofstraße&nbsp;9<br><em>The 79,000-Euro Question.</em></h1>
+    <p class="subhead">A line-by-line reading of fourteen German title, financial and assembly documents — surfacing the risks a quick viewing would never reveal, and the evidence that bridges €409,000 down to €330,000.</p>
+    <div class="meta-row">
+      <span>Object: <b>WEG Unit Nr. 3 · 2.&nbsp;OG</b></span>
+      <span>71634 Ludwigsburg (Untere Stadt)</span>
+      <span>Built <b>2008</b> · 4-unit MFH</span>
+      <span><b>99.11&nbsp;m²</b> · MEA 259/1000</span>
+      <span>Stellplatz Nr.&nbsp;7</span>
+      <span>Reviewed <b>10 Jun 2026</b></span>
+    </div>
+  </header>
+
+  <!-- ===================== VERDICT ===================== -->
+  <div class="verdict reveal">
+    <div class="v-left">
+      <div class="v-label">Bottom line</div>
+      <p>The flat is sound 2008 construction in a good-address location — but the building it sits in carries <strong>documented, unrepaired common-property damage</strong>, a <strong>critically thin reserve fund</strong>, an <strong>aging gas boiler</strong> and a <strong>just-closed redevelopment zone</strong>. Each is a deferred cost that lands on the next owner. At €4,127/m² you are paying a fully-renovated price for a building with a maintenance backlog. <strong>€330,000 (€3,330/m²) is a defensible, evidence-backed offer.</strong></p>
+    </div>
+    <div class="v-right">
+      <div class="price-line ask"><span class="lab">Asking</span><span class="num">€409,000</span></div>
+      <div class="price-line target"><span class="lab">Your target</span><span class="num">€330,000</span></div>
+      <div class="price-line delta"><span class="lab">Gap to close</span><span class="num">−€79,000 · −19.3%</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== 01 SNAPSHOT ===================== -->
+  <section id="snapshot">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The numbers that matter</h2></div>
+    <p class="sec-intro">Pulled directly from the Wirtschaftsplan, the 2024 Jahresabrechnung (HGA) and the Wohnflächenberechnung. Two of these four figures are quiet alarms.</p>
+    <div class="metrics reveal">
+      <div class="metric warn">
+        <div class="m-val">€21,373</div>
+        <div class="m-lab">Reserve fund — entire building (end 2024)</div>
+      </div>
+      <div class="metric warn">
+        <div class="m-val">€416<small>/mo</small></div>
+        <div class="m-lab">Hausgeld, up +21.6% from €342</div>
+      </div>
+      <div class="metric">
+        <div class="m-val">€4,127<small>/m²</small></div>
+        <div class="m-lab">At asking price · target €3,330/m²</div>
+      </div>
+      <div class="metric warn">
+        <div class="m-val">€926</div>
+        <div class="m-lab">2024 back-payment (Nachschuss) owed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 02 WATERFALL ===================== -->
+  <section id="bridge">
+    <div class="sec-head"><span class="sec-num">02</span><h2>From €409k to €330k — the bridge</h2></div>
+    <p class="sec-intro">These are <em>negotiation positions</em>, not a formal appraisal — but every line is anchored to a specific document finding below. Together they justify the full €79,000 reduction. Lead with the hard, provable items (areas, deferred repairs); treat the rest as cumulative pressure.</p>
+    <div class="waterfall reveal">
+      <div class="wf-row head"><div>#</div><div>Risk-adjusted deduction</div><div>weight</div><div>amount</div></div>
+      <div class="wf-row anchor"><div class="wf-i"></div><div class="wf-label">Asking price</div><div></div><div class="wf-amt" style="color:var(--ink)">€409,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">a</div><div class="wf-label">Living-area overstatement<span>balcony counted at 50%, EG storage counted as living space, "−3% plaster" estimate</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:23%"></div></div><div class="wf-amt">−€18,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">b</div><div class="wf-label">Deferred common-property repairs<span>Gutachten Bachem damages — repair tender rejected, your 259/1000 share of likely Sonderumlage</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:25%"></div></div><div class="wf-amt">−€20,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">c</div><div class="wf-label">Reserve-fund shortfall top-up<span>only €4,000/yr added building-wide; structurally underfunded for a 2008 MFH</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:13%"></div></div><div class="wf-amt">−€10,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">d</div><div class="wf-label">Heating system at end-of-life<span>2008 Junkers boiler · €2,356 repair Dec 2024 · GEG 65%-renewable replacement looming</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:10%"></div></div><div class="wf-amt">−€8,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">e</div><div class="wf-label">Sanierungsgebiet betterment levy<span>Sanierungsvermerk deleted 08.05.2024 → possible Ausgleichsbetrag</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:9%"></div></div><div class="wf-amt">−€7,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">f</div><div class="wf-label">Retaining-wall sealing (unresolved)<span>open 2024 → 2025, water ingress; no 2025 minutes confirm completion</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:8%"></div></div><div class="wf-amt">−€6,000</div></div>
+
+      <div class="wf-row"><div class="wf-i">g</div><div class="wf-label">Condition &amp; market position<span>no elevator, 2nd-floor walk-up, double (not triple) glazing, standard finish, legal-case contingency</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:13%"></div></div><div class="wf-amt">−€10,000</div></div>
+
+      <div class="wf-row total"><div class="wf-i"></div><div class="wf-label">Target offer</div><div></div><div class="wf-amt">€330,000</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 RISK REGISTER ===================== -->
+  <section id="risks">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The risk register</h2></div>
+    <p class="sec-intro">Twelve findings, ranked by severity. Each lists what the document actually says, why it matters, the source, and how to deploy it at the table. The ones marked <b>Critical</b> are the levers that move the price.</p>
+
+    <div class="risks">
+
+      <!-- R1 -->
+      <div class="risk crit reveal">
+        <div class="risk-top"><div><div class="risk-id">R-01</div><h3>Documented building damage — and the owners voted <em>not</em> to fix it</h3></div><span class="sev crit">Critical</span></div>
+        <div class="risk-body">
+          <p class="finding">An architect's report (<b>Gutachten Architekt Bachem</b>) documents <b>"Schäden am Gemeinschaftseigentum"</b> — damage to the common property — with a cost estimate. At the 2023 assembly the motion to commission Bachem to tender the repairs was <b>rejected unanimously</b>.</p>
+          <p class="why">Known structural defects exist, are quantified, and were deliberately deferred. Deferred damage does not disappear — it compounds and eventually returns as a <b>Sonderumlage</b> (special assessment) billed by your ownership share. Critically, <b>the Gutachten itself was not included in the document package</b> — an omission that is itself a warning sign.</p>
+          <div class="risk-foot"><span class="src">Protokoll 2023 · TOP 6</span><span class="lever">Demand the full Bachem report + cost estimate before signing. This is deduction (b).</span></div>
+        </div>
+      </div>
+
+      <!-- R2 -->
+      <div class="risk crit reveal">
+        <div class="risk-top"><div><div class="risk-id">R-02</div><h3>Reserve fund is dangerously thin for the building's age</h3></div><span class="sev crit">Critical</span></div>
+        <div class="risk-body">
+          <p class="finding">Total Erhaltungsrücklage at end-2024: <b>€21,372.73 for the whole 4-unit building</b> (your share ≈ €5,536). Annual top-up is only <b>€4,000</b>, and €3,199 was already withdrawn in 2024.</p>
+          <p class="why">A single façade, retaining-wall or heating job easily exceeds the entire reserve. With damage already on file (R-01), the probability of a special assessment in the first years of ownership is high. The reserve is effectively a buffer that has already been spent down.</p>
+          <div class="risk-foot"><span class="src">HGA 2024 · §6 + Vermögensbericht</span><span class="src">Wirtschaftsplan · §3</span><span class="lever">Underfunded reserve = you inherit the liability. Deduction (c).</span></div>
+        </div>
+      </div>
+
+      <!-- R3 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-03</div><h3>Redevelopment-zone note just deleted — a betterment levy may be coming</h3></div><span class="sev high">High</span></div>
+        <div class="risk-body">
+          <p class="finding">The land register shows the property was inside the <b>Sanierungsgebiet "Untere Stadt"</b>. The redevelopment note (Sanierungsvermerk) was only <b>deleted on 08.05.2024</b>.</p>
+          <p class="why">When a redevelopment area is formally closed, the municipality typically levies an <b>Ausgleichsbetrag</b> — a one-off charge for the land-value uplift, often a four- to five-figure sum. The timing (deletion in May 2024) strongly suggests an assessment is pending or was recently issued. Ask explicitly whether it has been billed and who pays it.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Abt. II Nr. 3 (gelöscht 08.05.2024)</span><span class="lever">Get written confirmation from the Stadt Ludwigsburg. Deduction (e).</span></div>
+        </div>
+      </div>
+
+      <!-- R4 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-04</div><h3>Retaining wall in the driveway needs sealing — unresolved across two years</h3></div><span class="sev high">High</span></div>
+        <div class="risk-body">
+          <p class="finding">In 2024 the manager was told to obtain quotes for <b>"Abdichtung der Stützmauer in der Einfahrt"</b> (waterproofing the driveway retaining wall). It reappears as a decision item on the <b>2025 agenda</b> — still not done. The <b>2025 minutes are absent</b> from the package, so the outcome is unknown.</p>
+          <p class="why">A retaining wall requiring waterproofing signals water ingress / soil-pressure issues. To be paid "aus der Rücklage" — depleting the already-thin fund (R-02). Water problems recur if only patched rather than properly remediated.</p>
+          <div class="risk-foot"><span class="src">Protokoll 2024 · TOP 4</span><span class="src">Tagesordnung 2025 · TOP 3</span><span class="lever">Request Protokoll 2025 + the awarded quote. Deduction (f).</span></div>
+        </div>
+      </div>
+
+      <!-- R5 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-05</div><h3>18-year-old gas boiler with a €2,356 repair already booked</h3></div><span class="sev high">High</span></div>
+        <div class="risk-body">
+          <p class="finding">Heating is a <b>2008 Junkers gas condensing boiler</b> (Baubeschreibung §21). In December 2024, <b>€2,356.27 of "Material aus Wartung Heizung"</b> was drawn from the reserve. The building uses gas with <b>no renewables</b> (Energieausweis).</p>
+          <p class="why">A gas boiler at ~18 years is near end-of-life; the large 2024 repair confirms it. Under the GEG ("Heizungsgesetz"), a forced replacement increasingly triggers a <b>65%-renewable requirement</b> — a major shared cost — while the CO₂ levy on gas keeps rising each year.</p>
+          <div class="risk-foot"><span class="src">Baubeschreibung · §21</span><span class="src">HGA 2024 · Kontoauszüge 09.12.2024</span><span class="src">Energieausweis</span><span class="lever">Price in a boiler-replacement reserve. Deduction (d).</span></div>
+        </div>
+      </div>
+
+      <!-- R6 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-06</div><h3>An open legal case sits on the community's books</h3></div><span class="sev med">Medium</span></div>
+        <div class="risk-body">
+          <p class="finding">The 2024 Vermögensbericht lists <b>"Verbindlichkeiten aus Rechtsfällen" of €1,263.23</b> — liabilities arising from legal proceedings — plus a separate line for legal-case receivables.</p>
+          <p class="why">A small figure, but it confirms the community has been (or is) in litigation. Legal disputes can escalate in cost and signal friction among only four owners. You need to know what it concerns and whether it is closed.</p>
+          <div class="risk-foot"><span class="src">HGA 2024 · Vermögensbericht §2 (9500-Abgrenzung)</span><span class="lever">Ask the Verwalter for the nature &amp; status of the Rechtsfall.</span></div>
+        </div>
+      </div>
+
+      <!-- R7 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-07</div><h3>Living area is calculated generously</h3></div><span class="sev med">Medium</span></div>
+        <div class="risk-body">
+          <p class="finding">The stated <b>99.11 m²</b> includes the <b>balcony at 50%</b> (4.40 m²) and the <b>ground-floor storage room</b> (3.22 m²) as living space, then applies a rough <b>"−3% plaster"</b> estimate rather than a survey.</p>
+          <p class="why">Under WoFlV, balconies usually count at 25% and external storage typically isn't living area at all. Adjusted, comparable living space is closer to <b>~93–95 m²</b>. So the true price-per-m² of actual living space is higher than advertised — a clean, factual lever.</p>
+          <div class="risk-foot"><span class="src">Wohnflächenberechnung · Whg. Nr. 3</span><span class="lever">Re-base €/m² on adjusted area. Deduction (a).</span></div>
+        </div>
+      </div>
+
+      <!-- R8 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-08</div><h3>Insurance: only a 2020/21 policy shown, with no flood cover visible</h3></div><span class="sev med">Medium</span></div>
+        <div class="risk-body">
+          <p class="finding">The only insurance document provided is the <b>2021 premium invoice</b> (Wohngebäude €698 + Haftpflicht €10). It lists no <b>Elementarschadenversicherung</b> (natural-hazard / Starkregen / flood cover), and there is no proof of <b>current</b> coverage or the insured sum.</p>
+          <p class="why">Given a known water/retaining-wall problem (R-04), missing natural-hazard cover is a real exposure. A 5-year-old invoice is not evidence the building is adequately insured today.</p>
+          <div class="risk-foot"><span class="src">Versicherungspolice (dated Dec 2020)</span><span class="lever">Demand the current policy + Elementar confirmation + insured value.</span></div>
+        </div>
+      </div>
+
+      <!-- R9 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-09</div><h3>Hausgeld is rising fast and was under-budgeted</h3></div><span class="sev med">Medium</span></div>
+        <div class="risk-body">
+          <p class="finding">Monthly Hausgeld jumped from <b>€342 to €416 (+21.6%)</b> from July 2025, and the 2024 statement still required a <b>€926.50 back-payment</b>. Each year's plan bakes in a "general 10% increase."</p>
+          <p class="why">Carrying cost is ~€4,992/year and trending up — and the repeated Nachschüsse show the budget chronically lags real costs. This erodes net yield and signals more increases ahead.</p>
+          <div class="risk-foot"><span class="src">Wirtschaftsplan · §4</span><span class="src">HGA 2024 · §5</span><span class="lever">Factor higher running costs into your yield math.</span></div>
+        </div>
+      </div>
+
+      <!-- R10 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-10</div><h3>1962 right-of-way servitude on the west side</h3></div><span class="sev low">Low</span></div>
+        <div class="risk-body">
+          <p class="finding">A <b>Winkeldurchgang</b> (passage right-of-way) on the west side is shared with the owner of Bauhofstraße 11 under a 1962 servitude (Servitutenbuch Bd. I Bl. 213 §108), recorded in Abt. II.</p>
+          <p class="why">A permanent encumbrance limiting exclusive use of part of the plot. Long-standing and low-impact, but it travels with the title and should be understood.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Abt. II Nr. 1</span><span class="lever">Confirm scope; usually accepted, note for completeness.</span></div>
+        </div>
+      </div>
+
+      <!-- R11 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-11</div><h3>Existing €155,000 mortgage must be cleared at closing</h3></div><span class="sev low">Low</span></div>
+        <div class="risk-body">
+          <p class="finding">A <b>€155,000 Grundschuld</b> for Sparda-Bank Baden-Württemberg (2010) is still registered against the unit in Abt. III; the four older charges were all deleted in 2010.</p>
+          <p class="why">Standard for an owner-financed flat, but it must be discharged so you receive the property <b>lastenfrei</b>. Verify the bank's Löschungsbewilligung is arranged via the notary's escrow before any payment.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Abt. III Nr. 5</span><span class="lever">Notary to confirm lien release in the purchase contract.</span></div>
+        </div>
+      </div>
+
+      <!-- R12 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-12</div><h3>Energy certificate expires now; data is a decade old</h3></div><span class="sev low">Low</span></div>
+        <div class="risk-body">
+          <p class="finding">The Energieausweis is a <b>consumption certificate valid only until 29.11.2026</b>, built on <b>2013–2015</b> usage (62 kWh/m²·a). Windows are double-glazed (U 1.1), not triple; no controlled ventilation.</p>
+          <p class="why">A fresh certificate will be required and the figures are stale. The fabric is decent-but-dated 2008 standard — modernization pressure (windows, ventilation, the contemplated PV) sits on the horizon, not the present.</p>
+          <div class="risk-foot"><span class="src">Energieausweis</span><span class="src">Protokoll 2024 · TOP 4 (PV study)</span><span class="lever">Minor; supports overall "dated building" framing.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== 04 DOCUMENTS TO DEMAND ===================== -->
+  <section id="gaps">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Documents to demand before you sign</h2></div>
+    <p class="sec-intro">What's <em>missing</em> from the package is as telling as what's in it. Make these a condition of proceeding — several directly unlock or confirm the deductions above.</p>
+    <div class="gaps reveal">
+      <ul>
+        <li><b>Gutachten Architekt Bachem</b> + full repair cost estimate (R-01)</li>
+        <li><b>Protokoll 2025</b> — outcome of the retaining-wall vote (R-04)</li>
+        <li><b>Current building insurance policy</b> + Elementarschaden &amp; insured sum (R-08)</li>
+        <li><b>Sanierungsgebiet / Ausgleichsbetrag</b> status letter from Stadt Ludwigsburg (R-03)</li>
+        <li><b>Jahresabrechnung 2025</b> + latest reserve balance (R-02)</li>
+        <li><b>Nature &amp; status of the Rechtsfall</b> on the WEG books (R-06)</li>
+        <li><b>Heating maintenance &amp; service records</b> 2022–2025 (R-05)</li>
+        <li><b>Beschluss-Sammlung</b> (full resolution register) of the WEG</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 05 TALKING POINTS ===================== -->
+  <section id="script">
+    <div class="sec-head"><span class="sec-num">05</span><h2>How to make the case at the table</h2></div>
+    <p class="sec-intro">Order matters. Open with the unarguable facts, let the deferred-maintenance reality do the heavy lifting, and frame €330,000 as the rational risk-adjusted number — not a lowball.</p>
+    <div class="points">
+      <div class="point"><p><b>Lead with the building, not the flat.</b> Concede the apartment shows well — then pivot: "The building behind it has an architect-documented damage report the owners declined to act on, and a reserve of only €21k to cover it." That single sentence reframes the price.</p></div>
+      <div class="point"><p><b>Quantify the inherited liability.</b> Damage report + retaining wall + 18-year boiler + a €21k reserve = a near-certain Sonderumlage. Your 259/1000 share of even a modest €60–100k works programme is €15–26k. That's not speculation — it's arithmetic on their own documents.</p></div>
+      <div class="point"><p><b>Use the area facts cleanly.</b> "Your 99 m² counts the balcony at half and the cellar storage as living space. On comparable living area this is ~94 m², so €409k is really €4,350/m² — well above a 2008 building with this maintenance backlog."</p></div>
+      <div class="point"><p><b>Make the missing documents work for you.</b> "We can't price what we can't see. Until we have the Bachem report, the 2025 minutes and the current insurance, we have to price the downside." Either they produce them (and you re-assess) or the discount stands.</p></div>
+      <div class="point"><p><b>Anchor and hold.</b> Present €330,000 as the considered, evidence-based figure with the bridge in §02. If they counter, trade only against documents that <em>remove</em> a risk (e.g., proof the Ausgleichsbetrag is paid), not against sentiment.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="reveal">
+    <p class="disc">Prepared as a document-based due-diligence aid for Nithin. Findings are drawn strictly from the fourteen PDFs supplied (Grundbuchauszug, Teilungserklärung, Energieausweis, Wirtschaftsplan, HGA 2024, Heizkosten 2024, Protokolle 2023/2024, Tagesordnung 2025, Wohnflächenberechnung, Versicherungspolice, Lageplan, Liegenschaftskarte, Grundriss). Euro deductions in §02 are negotiation positions, not a certified valuation (Verkehrswertgutachten), and the Sonderumlage/Ausgleichsbetrag figures are estimates pending the missing documents in §04. This is not legal or tax advice — have the purchase contract and Grundbuch reviewed by your Notar and, ideally, the building inspected by a Bausachverständiger before signing.</p>
+    <p class="sign">End of dossier · Bauhofstraße 9 · Ludwigsburg · €330,000 target</p>
+  </footer>
+
+</div>
+
+<script>
+  // staggered reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay = (Math.min(i,6)*60)+'ms';
+    io.observe(el);
+  });
+  // animate waterfall bars when in view
+  const bars = document.querySelectorAll('.wf-bar');
+  const bo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const w = e.target.style.width; e.target.style.width='0';
+        requestAnimationFrame(()=>{ e.target.style.transition='width .9s cubic-bezier(.2,.7,.2,1)'; e.target.style.width=w; });
+        bo.unobserve(e.target);
+      }
+    });
+  },{threshold:.4});
+  bars.forEach(b=>bo.observe(b));
+</script>
+</body>
+</html>

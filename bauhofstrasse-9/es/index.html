@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bauhofstraße 9 — Dosier de Riesgos de Compra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f1ece0;
+    --paper-2:#e9e2d2;
+    --ink:#1c1813;
+    --ink-soft:#4a4135;
+    --ink-faint:#8a7d68;
+    --line:#cbbfa6;
+    --oxblood:#7c2128;
+    --oxblood-bright:#a02d35;
+    --ochre:#b67611;
+    --forest:#3d5a3a;
+    --slate:#4f5d6e;
+    --crit:#7c2128;
+    --high:#b04a13;
+    --med:#9a7a10;
+    --low:#3d5a3a;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 18px 40px -28px rgba(28,24,19,.55);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% -5%, rgba(182,118,17,.07), transparent 38%),
+      radial-gradient(circle at 90% 8%, rgba(124,33,40,.06), transparent 32%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-optical-sizing:auto;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+  header.masthead{padding:46px 0 30px;border-bottom:3px double var(--ink);}
+  .kicker{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+  .kicker .stamp{
+    color:var(--oxblood);border:1.5px solid var(--oxblood);border-radius:3px;
+    padding:4px 10px;transform:rotate(-2.2deg);font-weight:700;letter-spacing:.18em;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(34px,6vw,72px);
+    line-height:.98;letter-spacing:-.015em;margin:26px 0 6px;
+  }
+  h1 em{font-style:italic;color:var(--oxblood);font-weight:500;}
+  .subhead{
+    font-size:20px;color:var(--ink-soft);max-width:62ch;font-style:italic;
+    margin:0 0 22px;
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:8px 26px;font-family:"JetBrains Mono",monospace;
+    font-size:12px;letter-spacing:.04em;color:var(--ink-faint);text-transform:uppercase;
+  }
+  .meta-row b{color:var(--ink);font-weight:500;}
+
+  .verdict{
+    margin:34px 0 12px;display:grid;grid-template-columns:1.35fr 1fr;gap:0;
+    border:1.5px solid var(--ink);background:var(--paper-2);box-shadow:var(--shadow);
+  }
+  .verdict .v-left{padding:30px 34px;border-right:1.5px solid var(--ink);}
+  .verdict .v-right{padding:30px 34px;display:flex;flex-direction:column;justify-content:center;gap:14px;}
+  .v-label{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+  .v-left p{margin:0;font-size:19px;}
+  .v-left strong{color:var(--oxblood);}
+  .price-line{display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-family:"JetBrains Mono",monospace;}
+  .price-line .lab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+  .price-line .num{font-size:24px;font-weight:700;}
+  .price-line.ask .num{color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:1.5px;}
+  .price-line.target .num{color:var(--forest);font-size:30px;}
+  .price-line.delta .num{color:var(--oxblood-bright);}
+
+  section{padding:52px 0 10px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;border-bottom:1px solid var(--line);padding-bottom:10px;}
+  .sec-num{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--oxblood);font-weight:700;letter-spacing:.1em;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(24px,3.2vw,36px);margin:0;letter-spacing:-.01em;}
+  .sec-intro{color:var(--ink-soft);max-width:74ch;margin:14px 0 26px;font-size:18px;}
+
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);background:rgba(255,255,255,.25);}
+  .metric{padding:22px 20px;border-right:1px solid var(--line);}
+  .metric:last-child{border-right:none;}
+  .metric .m-val{font-family:"Fraunces",serif;font-size:34px;font-weight:600;line-height:1;letter-spacing:-.02em;}
+  .metric .m-val small{font-size:16px;color:var(--ink-faint);font-weight:400;}
+  .metric .m-lab{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px;}
+  .metric.warn .m-val{color:var(--oxblood);}
+
+  .waterfall{border:1.5px solid var(--ink);background:var(--paper-2);padding:8px 0;box-shadow:var(--shadow);}
+  .wf-row{display:grid;grid-template-columns:34px 1fr 150px 132px;align-items:center;gap:14px;padding:13px 26px;border-bottom:1px solid rgba(203,191,166,.6);}
+  .wf-row:last-child{border-bottom:none;}
+  .wf-row .wf-i{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);}
+  .wf-row .wf-label{font-size:16.5px;}
+  .wf-row .wf-label span{display:block;font-size:12.5px;color:var(--ink-faint);font-style:italic;}
+  .wf-bar-wrap{height:9px;background:rgba(124,33,40,.12);border-radius:2px;overflow:hidden;}
+  .wf-bar{height:100%;background:linear-gradient(90deg,var(--oxblood),var(--oxblood-bright));transform-origin:left;}
+  .wf-amt{font-family:"JetBrains Mono",monospace;font-size:17px;text-align:right;font-weight:500;color:var(--oxblood-bright);}
+  .wf-row.head{background:transparent;border-bottom:1.5px solid var(--ink);}
+  .wf-row.head div{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);}
+  .wf-row.total{background:rgba(61,90,58,.1);border-top:1.5px solid var(--ink);}
+  .wf-row.total .wf-label{font-family:"Fraunces",serif;font-size:21px;font-weight:600;}
+  .wf-row.total .wf-amt{color:var(--forest);font-size:20px;font-weight:700;}
+  .wf-row.anchor{background:rgba(28,24,19,.04);}
+  .wf-row.anchor .wf-label,.wf-row.anchor .wf-amt{font-family:"Fraunces",serif;font-size:19px;font-weight:600;color:var(--ink);}
+
+  .risks{display:grid;gap:20px;}
+  .risk{
+    border:1px solid var(--line);background:rgba(255,255,255,.32);
+    border-left:5px solid var(--med);box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1fr;overflow:hidden;
+  }
+  .risk.crit{border-left-color:var(--crit);}
+  .risk.high{border-left-color:var(--high);}
+  .risk.med{border-left-color:var(--med);}
+  .risk.low{border-left-color:var(--low);}
+  .risk-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:22px 26px 6px;}
+  .risk-id{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-faint);letter-spacing:.1em;}
+  .risk h3{font-family:"Fraunces",serif;font-weight:600;font-size:23px;line-height:1.18;margin:6px 0 0;letter-spacing:-.01em;flex:1;}
+  .sev{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px;border-radius:3px;white-space:nowrap;font-weight:700;align-self:flex-start;}
+  .sev.crit{background:var(--crit);color:#f7ede0;}
+  .sev.high{background:var(--high);color:#fdf3e6;}
+  .sev.med{background:var(--med);color:#fdf6df;}
+  .sev.low{background:var(--low);color:#eef4ec;}
+  .risk-body{padding:6px 26px 22px;}
+  .risk-body p{margin:10px 0 0;font-size:17px;}
+  .finding{color:var(--ink);}
+  .why{color:var(--ink-soft);}
+  .risk-foot{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);align-items:center;}
+  .src{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-faint);background:var(--paper-2);border:1px solid var(--line);padding:3px 9px;border-radius:3px;}
+  .lever{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--forest);font-weight:700;}
+  .lever::before{content:"▸ NEGOCIACIÓN ";letter-spacing:.14em;color:var(--ink-faint);font-weight:400;}
+
+  .gaps{border:1.5px dashed var(--oxblood);background:rgba(124,33,40,.045);padding:26px 30px;}
+  .gaps ul{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 30px;}
+  .gaps li{padding-left:26px;position:relative;font-size:16.5px;}
+  .gaps li::before{content:"☐";position:absolute;left:0;top:0;color:var(--oxblood);font-size:18px;}
+  .gaps li b{font-weight:600;}
+
+  .points{counter-reset:pt;display:grid;gap:14px;}
+  .point{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .point::before{counter-increment:pt;content:counter(pt,decimal-leading-zero);font-family:"Fraunces",serif;font-size:30px;font-weight:600;color:var(--oxblood);line-height:1;}
+  .point p{margin:0;font-size:17px;}
+  .point p b{font-weight:600;}
+
+  footer{margin-top:60px;border-top:3px double var(--ink);padding:30px 0 70px;}
+  footer .disc{font-size:13.5px;color:var(--ink-faint);max-width:90ch;font-style:italic;line-height:1.6;}
+  footer .sign{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:18px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  @media (max-width:780px){
+    body{font-size:17px;}
+    .wrap{padding:0 20px;}
+    .verdict{grid-template-columns:1fr;}
+    .verdict .v-left{border-right:none;border-bottom:1.5px solid var(--ink);}
+    .metrics{grid-template-columns:1fr 1fr;}
+    .metric:nth-child(2){border-right:none;}
+    .metric:nth-child(1),.metric:nth-child(2){border-bottom:1px solid var(--line);}
+    .wf-row{grid-template-columns:24px 1fr 96px;}
+    .wf-bar-wrap{display:none;}
+    .gaps ul{grid-template-columns:1fr;}
+    .point{grid-template-columns:36px 1fr;}
+  }
+  @media print{
+    body{background:#fff;font-size:12px;}
+    body::before{display:none;}
+    .reveal{opacity:1;transform:none;}
+    .risk,.verdict,.waterfall,.metrics{box-shadow:none;}
+    section{padding:18px 0 4px;break-inside:avoid;}
+    .risk{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div style="position:fixed;top:10px;right:14px;z-index:9999;font:500 12px/1 'JetBrains Mono',monospace;background:rgba(241,236,224,.92);border:1px solid #1c1813;padding:6px 10px;border-radius:4px;letter-spacing:.08em;">
+  <a href="../" style="color:#7c2128;text-decoration:none;">EN</a> · <strong>ES</strong>
+</div>
+<div class="wrap">
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="masthead">
+    <div class="kicker">
+      <span>Diligencia debida de compra · Eigentumswohnung</span>
+      <span class="stamp">Confidencial — para Nithin</span>
+    </div>
+    <h1>Bauhofstraße&nbsp;9<br><em>La pregunta de los 79.000 euros.</em></h1>
+    <p class="subhead">Una lectura línea por línea de catorce documentos alemanes de propiedad, finanzas y comunidad — sacando a la luz los riesgos que una visita rápida nunca revelaría, y la evidencia que rebaja de 409.000 € a 330.000 €.</p>
+    <div class="meta-row">
+      <span>Objeto: <b>Vivienda WEG Nr. 3 · 2.&nbsp;OG (2.º piso)</b></span>
+      <span>71634 Ludwigsburg (Untere Stadt)</span>
+      <span>Construido en <b>2008</b> · edificio de 4 viviendas</span>
+      <span><b>99,11&nbsp;m²</b> · cuota 259/1000</span>
+      <span>Plaza de garaje Nr.&nbsp;7</span>
+      <span>Revisado el <b>10 jun 2026</b></span>
+    </div>
+  </header>
+
+  <!-- ===================== VEREDICTO ===================== -->
+  <div class="verdict reveal">
+    <div class="v-left">
+      <div class="v-label">Conclusión</div>
+      <p>El piso es una construcción sólida de 2008 en una buena ubicación — pero el edificio donde se encuentra arrastra <strong>daños documentados y sin reparar en el elemento común</strong>, un <strong>fondo de reserva críticamente bajo</strong>, una <strong>caldera de gas envejecida</strong> y una <strong>zona de rehabilitación urbana recién cerrada</strong>. Cada uno es un coste diferido que recae sobre el próximo propietario. A 4.127 €/m² está pagando precio de piso totalmente reformado por un edificio con mantenimiento pendiente. <strong>330.000 € (3.330 €/m²) es una oferta defendible y respaldada por evidencia.</strong></p>
+    </div>
+    <div class="v-right">
+      <div class="price-line ask"><span class="lab">Precio pedido</span><span class="num">409.000 €</span></div>
+      <div class="price-line target"><span class="lab">Su objetivo</span><span class="num">330.000 €</span></div>
+      <div class="price-line delta"><span class="lab">Brecha a cerrar</span><span class="num">−79.000 € · −19,3%</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== 01 RESUMEN ===================== -->
+  <section id="snapshot">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Las cifras que importan</h2></div>
+    <p class="sec-intro">Extraídas directamente del Wirtschaftsplan (presupuesto), de la liquidación anual 2024 (HGA) y del cálculo de superficie habitable. Dos de estas cuatro cifras son alarmas silenciosas.</p>
+    <div class="metrics reveal">
+      <div class="metric warn">
+        <div class="m-val">21.373 €</div>
+        <div class="m-lab">Fondo de reserva — todo el edificio (fin 2024)</div>
+      </div>
+      <div class="metric warn">
+        <div class="m-val">416 €<small>/mes</small></div>
+        <div class="m-lab">Gastos de comunidad, +21,6% desde 342 €</div>
+      </div>
+      <div class="metric">
+        <div class="m-val">4.127 €<small>/m²</small></div>
+        <div class="m-lab">Al precio pedido · objetivo 3.330 €/m²</div>
+      </div>
+      <div class="metric warn">
+        <div class="m-val">926 €</div>
+        <div class="m-lab">Liquidación adicional 2024 adeudada (Nachschuss)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 02 PUENTE ===================== -->
+  <section id="bridge">
+    <div class="sec-head"><span class="sec-num">02</span><h2>De 409.000 € a 330.000 € — el puente</h2></div>
+    <p class="sec-intro">Estas son <em>posiciones de negociación</em>, no una tasación formal — pero cada línea se ancla a un hallazgo documental concreto más abajo. En conjunto justifican la reducción completa de 79.000 €. Empiece por las partidas duras y demostrables (superficies, reparaciones diferidas); use el resto como presión acumulada.</p>
+    <div class="waterfall reveal">
+      <div class="wf-row head"><div>#</div><div>Deducción ajustada por riesgo</div><div>peso</div><div>importe</div></div>
+      <div class="wf-row anchor"><div class="wf-i"></div><div class="wf-label">Precio pedido</div><div></div><div class="wf-amt" style="color:var(--ink)">409.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">a</div><div class="wf-label">Superficie habitable sobreestimada<span>balcón contado al 50%, trastero en planta baja contado como superficie habitable, estimación "−3% revoque"</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:23%"></div></div><div class="wf-amt">−18.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">b</div><div class="wf-label">Reparaciones diferidas del elemento común<span>daños del informe Bachem — licitación de reparación rechazada; su cuota 259/1000 de una probable derrama (Sonderumlage)</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:25%"></div></div><div class="wf-amt">−20.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">c</div><div class="wf-label">Refuerzo por déficit del fondo de reserva<span>solo 4.000 €/año aportados a todo el edificio; estructuralmente infrafinanciado para un MFH de 2008</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:13%"></div></div><div class="wf-amt">−10.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">d</div><div class="wf-label">Sistema de calefacción al final de su vida útil<span>caldera Junkers de 2008 · reparación de 2.356 € en dic 2024 · sustitución bajo la ley GEG (65% renovable) en el horizonte</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:10%"></div></div><div class="wf-amt">−8.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">e</div><div class="wf-label">Contribución de mejora por zona de rehabilitación<span>nota de saneamiento (Sanierungsvermerk) cancelada el 08.05.2024 → posible Ausgleichsbetrag</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:9%"></div></div><div class="wf-amt">−7.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">f</div><div class="wf-label">Sellado del muro de contención (sin resolver)<span>abierto 2024 → 2025, filtración de agua; el acta de 2025 no confirma su finalización</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:8%"></div></div><div class="wf-amt">−6.000 €</div></div>
+
+      <div class="wf-row"><div class="wf-i">g</div><div class="wf-label">Estado y posicionamiento de mercado<span>sin ascensor, 2.º piso sin elevador, doble (no triple) acristalamiento, acabado estándar, contingencia por litigio</span></div><div class="wf-bar-wrap"><div class="wf-bar" style="width:13%"></div></div><div class="wf-amt">−10.000 €</div></div>
+
+      <div class="wf-row total"><div class="wf-i"></div><div class="wf-label">Oferta objetivo</div><div></div><div class="wf-amt">330.000 €</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 REGISTRO DE RIESGOS ===================== -->
+  <section id="risks">
+    <div class="sec-head"><span class="sec-num">03</span><h2>El registro de riesgos</h2></div>
+    <p class="sec-intro">Doce hallazgos, ordenados por gravedad. Cada uno indica lo que el documento dice realmente, por qué importa, la fuente y cómo usarlo en la mesa de negociación. Los marcados como <b>Crítico</b> son las palancas que mueven el precio.</p>
+
+    <div class="risks">
+
+      <!-- R1 -->
+      <div class="risk crit reveal">
+        <div class="risk-top"><div><div class="risk-id">R-01</div><h3>Daños documentados en el edificio — y los propietarios votaron <em>no</em> repararlos</h3></div><span class="sev crit">Crítico</span></div>
+        <div class="risk-body">
+          <p class="finding">Un informe de arquitecto (<b>Gutachten Architekt Bachem</b>) documenta <b>"Schäden am Gemeinschaftseigentum"</b> — daños en el elemento común — con un presupuesto. En la junta de 2023 la moción para encargar a Bachem la licitación de las reparaciones fue <b>rechazada por unanimidad</b>.</p>
+          <p class="why">Existen defectos estructurales conocidos, cuantificados y deliberadamente aplazados. Los daños diferidos no desaparecen — se agravan y acaban volviendo como una <b>derrama (Sonderumlage)</b> facturada según su cuota de propiedad. Y lo más importante: <b>el propio informe Bachem no estaba incluido en la documentación</b> — una omisión que ya es de por sí una señal de alarma.</p>
+          <div class="risk-foot"><span class="src">Protokoll 2023 · TOP 6</span><span class="lever">Exija el informe Bachem completo + presupuesto antes de firmar. Es la deducción (b).</span></div>
+        </div>
+      </div>
+
+      <!-- R2 -->
+      <div class="risk crit reveal">
+        <div class="risk-top"><div><div class="risk-id">R-02</div><h3>El fondo de reserva es peligrosamente bajo para la antigüedad del edificio</h3></div><span class="sev crit">Crítico</span></div>
+        <div class="risk-body">
+          <p class="finding">Reserva total (Erhaltungsrücklage) a fin de 2024: <b>21.372,73 € para todo el edificio de 4 viviendas</b> (su parte ≈ 5.536 €). La aportación anual es de solo <b>4.000 €</b>, y en 2024 ya se retiraron 3.199 €.</p>
+          <p class="why">Una sola obra de fachada, muro de contención o calefacción supera fácilmente todo el fondo. Con daños ya en el expediente (R-01), la probabilidad de una derrama en los primeros años de propiedad es alta. La reserva es, en la práctica, un colchón que ya se ha gastado.</p>
+          <div class="risk-foot"><span class="src">HGA 2024 · §6 + informe patrimonial</span><span class="src">Wirtschaftsplan · §3</span><span class="lever">Reserva infrafinanciada = usted hereda la responsabilidad. Deducción (c).</span></div>
+        </div>
+      </div>
+
+      <!-- R3 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-03</div><h3>Nota de rehabilitación recién cancelada — podría llegar una contribución de mejora</h3></div><span class="sev high">Alto</span></div>
+        <div class="risk-body">
+          <p class="finding">El registro de la propiedad muestra que el inmueble estaba dentro del <b>Sanierungsgebiet "Untere Stadt"</b> (zona de rehabilitación urbana). La nota de saneamiento (Sanierungsvermerk) se <b>canceló el 08.05.2024</b>.</p>
+          <p class="why">Cuando una zona de rehabilitación se cierra formalmente, el municipio suele imponer un <b>Ausgleichsbetrag</b> — un cargo único por la revalorización del suelo, a menudo de cuatro o cinco cifras. El momento (cancelación en mayo de 2024) sugiere con fuerza que una liquidación está pendiente o se emitió recientemente. Pregunte explícitamente si ya se ha facturado y quién la paga.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Secc. II Nr. 3 (cancelada 08.05.2024)</span><span class="lever">Obtenga confirmación por escrito del Ayuntamiento de Ludwigsburg. Deducción (e).</span></div>
+        </div>
+      </div>
+
+      <!-- R4 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-04</div><h3>El muro de contención de la entrada necesita sellado — sin resolver durante dos años</h3></div><span class="sev high">Alto</span></div>
+        <div class="risk-body">
+          <p class="finding">En 2024 se encargó al administrador obtener presupuestos para <b>"Abdichtung der Stützmauer in der Einfahrt"</b> (impermeabilización del muro de contención de la entrada). Reaparece como punto de decisión en el <b>orden del día de 2025</b> — todavía sin hacer. El <b>acta de 2025 no está</b> en la documentación, así que el resultado se desconoce.</p>
+          <p class="why">Un muro de contención que requiere impermeabilización indica filtración de agua / problemas de empuje del terreno. Se pagaría "aus der Rücklage" — agotando el ya escaso fondo (R-02). Los problemas de agua reaparecen si solo se parchean en lugar de remediarse correctamente.</p>
+          <div class="risk-foot"><span class="src">Protokoll 2024 · TOP 4</span><span class="src">Tagesordnung 2025 · TOP 3</span><span class="lever">Solicite el acta de 2025 + el presupuesto adjudicado. Deducción (f).</span></div>
+        </div>
+      </div>
+
+      <!-- R5 -->
+      <div class="risk high reveal">
+        <div class="risk-top"><div><div class="risk-id">R-05</div><h3>Caldera de gas de 18 años con una reparación de 2.356 € ya registrada</h3></div><span class="sev high">Alto</span></div>
+        <div class="risk-body">
+          <p class="finding">La calefacción es una <b>caldera de condensación de gas Junkers de 2008</b> (Baubeschreibung §21). En diciembre de 2024 se retiraron del fondo <b>2.356,27 € de "Material aus Wartung Heizung"</b> (material de mantenimiento de calefacción). El edificio usa gas <b>sin energías renovables</b> (Energieausweis).</p>
+          <p class="why">Una caldera de gas con ~18 años está cerca del fin de su vida útil; la gran reparación de 2024 lo confirma. Bajo la ley GEG ("Heizungsgesetz"), una sustitución forzosa activa cada vez más un <b>requisito del 65% de renovables</b> — un coste común importante — mientras el impuesto sobre el CO₂ del gas sube cada año.</p>
+          <div class="risk-foot"><span class="src">Baubeschreibung · §21</span><span class="src">HGA 2024 · extractos 09.12.2024</span><span class="src">Energieausweis</span><span class="lever">Provisione una reserva para sustituir la caldera. Deducción (d).</span></div>
+        </div>
+      </div>
+
+      <!-- R6 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-06</div><h3>Un litigio abierto figura en las cuentas de la comunidad</h3></div><span class="sev med">Medio</span></div>
+        <div class="risk-body">
+          <p class="finding">El informe patrimonial de 2024 recoge <b>"Verbindlichkeiten aus Rechtsfällen" por 1.263,23 €</b> — pasivos derivados de procedimientos legales — además de una partida separada para créditos por litigios.</p>
+          <p class="why">Una cifra pequeña, pero confirma que la comunidad ha estado (o está) en litigio. Las disputas legales pueden escalar en coste y señalan fricción entre solo cuatro propietarios. Necesita saber de qué trata y si está cerrado.</p>
+          <div class="risk-foot"><span class="src">HGA 2024 · informe patrimonial §2 (9500-Abgrenzung)</span><span class="lever">Pida al administrador la naturaleza y el estado del litigio (Rechtsfall).</span></div>
+        </div>
+      </div>
+
+      <!-- R7 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-07</div><h3>La superficie habitable está calculada de forma generosa</h3></div><span class="sev med">Medio</span></div>
+        <div class="risk-body">
+          <p class="finding">Los <b>99,11 m²</b> declarados incluyen el <b>balcón al 50%</b> (4,40 m²) y el <b>trastero de planta baja</b> (3,22 m²) como superficie habitable, y luego aplican una estimación tosca de <b>"−3% revoque"</b> en lugar de una medición.</p>
+          <p class="why">Según la WoFlV, los balcones suelen contar al 25% y los trasteros externos normalmente no son superficie habitable. Ajustado, la superficie habitable comparable se acerca a <b>~93–95 m²</b>. Así que el precio real por m² de superficie habitable efectiva es mayor que el anunciado — una palanca limpia y objetiva.</p>
+          <div class="risk-foot"><span class="src">Wohnflächenberechnung · Vivienda Nr. 3</span><span class="lever">Recalcule el €/m² sobre la superficie ajustada. Deducción (a).</span></div>
+        </div>
+      </div>
+
+      <!-- R8 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-08</div><h3>Seguro: solo se aporta una póliza de 2020/21, sin cobertura de inundación visible</h3></div><span class="sev med">Medio</span></div>
+        <div class="risk-body">
+          <p class="finding">El único documento de seguro aportado es la <b>factura de prima de 2021</b> (edificio 698 € + responsabilidad civil 10 €). No menciona <b>Elementarschadenversicherung</b> (cobertura de riesgos naturales / lluvia torrencial / inundación), y no hay prueba de cobertura <b>vigente</b> ni de la suma asegurada.</p>
+          <p class="why">Dado un problema de agua/muro de contención conocido (R-04), la falta de cobertura de riesgos naturales es una exposición real. Una factura de hace 5 años no prueba que el edificio esté hoy adecuadamente asegurado.</p>
+          <div class="risk-foot"><span class="src">Versicherungspolice (fechada dic 2020)</span><span class="lever">Exija la póliza vigente + confirmación de Elementar + valor asegurado.</span></div>
+        </div>
+      </div>
+
+      <!-- R9 -->
+      <div class="risk med reveal">
+        <div class="risk-top"><div><div class="risk-id">R-09</div><h3>Los gastos de comunidad suben rápido y estaban infrapresupuestados</h3></div><span class="sev med">Medio</span></div>
+        <div class="risk-body">
+          <p class="finding">El Hausgeld mensual saltó de <b>342 € a 416 € (+21,6%)</b> desde julio de 2025, y la liquidación de 2024 aún requirió un <b>pago adicional de 926,50 €</b>. El plan de cada año incorpora un "aumento general del 10%".</p>
+          <p class="why">El coste de tenencia es de ~4.992 €/año y al alza — y las repetidas liquidaciones adicionales (Nachschüsse) muestran que el presupuesto va crónicamente por detrás de los costes reales. Esto erosiona la rentabilidad neta y anticipa más subidas.</p>
+          <div class="risk-foot"><span class="src">Wirtschaftsplan · §4</span><span class="src">HGA 2024 · §5</span><span class="lever">Incorpore mayores costes corrientes en su cálculo de rentabilidad.</span></div>
+        </div>
+      </div>
+
+      <!-- R10 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-10</div><h3>Servidumbre de paso de 1962 en el lado oeste</h3></div><span class="sev low">Bajo</span></div>
+        <div class="risk-body">
+          <p class="finding">Un <b>Winkeldurchgang</b> (servidumbre de paso) en el lado oeste se comparte con el propietario de Bauhofstraße 11 en virtud de una servidumbre de 1962 (Servitutenbuch Bd. I Bl. 213 §108), inscrita en la Secc. II.</p>
+          <p class="why">Una carga permanente que limita el uso exclusivo de parte de la parcela. Antigua y de bajo impacto, pero acompaña al título y conviene entenderla.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Secc. II Nr. 1</span><span class="lever">Confirme el alcance; suele aceptarse, anótelo por exhaustividad.</span></div>
+        </div>
+      </div>
+
+      <!-- R11 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-11</div><h3>Una hipoteca existente de 155.000 € debe cancelarse en la firma</h3></div><span class="sev low">Bajo</span></div>
+        <div class="risk-body">
+          <p class="finding">Una <b>Grundschuld de 155.000 €</b> a favor de Sparda-Bank Baden-Württemberg (2010) sigue inscrita sobre la vivienda en la Secc. III; las cuatro cargas anteriores se cancelaron todas en 2010.</p>
+          <p class="why">Habitual en un piso financiado por el propietario, pero debe cancelarse para que reciba la propiedad <b>libre de cargas</b> (lastenfrei). Verifique que la autorización de cancelación del banco (Löschungsbewilligung) se gestione vía la cuenta de garantía del notario antes de cualquier pago.</p>
+          <div class="risk-foot"><span class="src">Grundbuch · Secc. III Nr. 5</span><span class="lever">El notario debe confirmar la liberación de la carga en el contrato.</span></div>
+        </div>
+      </div>
+
+      <!-- R12 -->
+      <div class="risk low reveal">
+        <div class="risk-top"><div><div class="risk-id">R-12</div><h3>El certificado energético caduca ya; los datos tienen una década</h3></div><span class="sev low">Bajo</span></div>
+        <div class="risk-body">
+          <p class="finding">El Energieausweis es un <b>certificado de consumo válido solo hasta el 29.11.2026</b>, basado en el consumo de <b>2013–2015</b> (62 kWh/m²·a). Las ventanas son de doble acristalamiento (U 1,1), no triple; sin ventilación controlada.</p>
+          <p class="why">Se requerirá un certificado nuevo y las cifras están desfasadas. La envolvente es de un estándar decente pero anticuado de 2008 — la presión de modernización (ventanas, ventilación, la fotovoltaica contemplada) está en el horizonte, no en el presente.</p>
+          <div class="risk-foot"><span class="src">Energieausweis</span><span class="src">Protokoll 2024 · TOP 4 (estudio FV)</span><span class="lever">Menor; refuerza el marco general de "edificio anticuado".</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== 04 DOCUMENTOS A EXIGIR ===================== -->
+  <section id="gaps">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Documentos a exigir antes de firmar</h2></div>
+    <p class="sec-intro">Lo que <em>falta</em> en la documentación es tan revelador como lo que hay. Conviértalos en condición para avanzar — varios desbloquean o confirman directamente las deducciones de arriba.</p>
+    <div class="gaps reveal">
+      <ul>
+        <li><b>Gutachten Architekt Bachem</b> + presupuesto completo de reparación (R-01)</li>
+        <li><b>Acta de 2025 (Protokoll 2025)</b> — resultado de la votación del muro (R-04)</li>
+        <li><b>Póliza de seguro vigente</b> + Elementarschaden y suma asegurada (R-08)</li>
+        <li><b>Estado de Sanierungsgebiet / Ausgleichsbetrag</b> — carta del Ayuntamiento de Ludwigsburg (R-03)</li>
+        <li><b>Liquidación anual 2025</b> + saldo de reserva más reciente (R-02)</li>
+        <li><b>Naturaleza y estado del litigio (Rechtsfall)</b> en las cuentas de la WEG (R-06)</li>
+        <li><b>Historial de mantenimiento de calefacción</b> 2022–2025 (R-05)</li>
+        <li><b>Beschluss-Sammlung</b> (registro completo de acuerdos) de la WEG</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 05 ARGUMENTOS ===================== -->
+  <section id="script">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Cómo defender el caso en la mesa</h2></div>
+    <p class="sec-intro">El orden importa. Empiece con los hechos incontestables, deje que la realidad del mantenimiento diferido haga el trabajo pesado, y presente 330.000 € como la cifra racional ajustada por riesgo — no como una oferta a la baja.</p>
+    <div class="points">
+      <div class="point"><p><b>Empiece por el edificio, no por el piso.</b> Reconozca que la vivienda luce bien — y luego gire: "El edificio que hay detrás tiene un informe de arquitecto que documenta daños y que los propietarios decidieron no actuar, y una reserva de solo 21.000 € para cubrirlo." Esa sola frase replantea el precio.</p></div>
+      <div class="point"><p><b>Cuantifique la responsabilidad heredada.</b> Informe de daños + muro de contención + caldera de 18 años + una reserva de 21.000 € = una derrama casi segura. Su cuota 259/1000 de un programa de obras incluso modesto de 60–100.000 € es de 15–26.000 €. No es especulación — es aritmética sobre sus propios documentos.</p></div>
+      <div class="point"><p><b>Use los hechos de superficie con limpieza.</b> "Sus 99 m² cuentan el balcón a la mitad y el trastero como superficie habitable. Sobre superficie comparable son ~94 m², así que 409.000 € son en realidad 4.350 €/m² — muy por encima de un edificio de 2008 con este mantenimiento pendiente."</p></div>
+      <div class="point"><p><b>Haga que los documentos que faltan jueguen a su favor.</b> "No podemos poner precio a lo que no vemos. Hasta tener el informe Bachem, el acta de 2025 y el seguro vigente, tenemos que poner precio al escenario adverso." O los aportan (y usted reevalúa) o el descuento se mantiene.</p></div>
+      <div class="point"><p><b>Ancle y mantenga.</b> Presente 330.000 € como la cifra meditada y basada en evidencia, con el puente del §02. Si contraofertan, negocie solo contra documentos que <em>eliminen</em> un riesgo (p. ej., prueba de que el Ausgleichsbetrag está pagado), no contra sentimientos.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== PIE ===================== -->
+  <footer class="reveal">
+    <p class="disc">Preparado como apoyo de diligencia debida basada en documentos para Nithin. Los hallazgos proceden estrictamente de los catorce PDF aportados (Grundbuchauszug, Teilungserklärung, Energieausweis, Wirtschaftsplan, HGA 2024, Heizkosten 2024, Protokolle 2023/2024, Tagesordnung 2025, Wohnflächenberechnung, Versicherungspolice, Lageplan, Liegenschaftskarte, Grundriss). Las deducciones en euros del §02 son posiciones de negociación, no una tasación certificada (Verkehrswertgutachten), y las cifras de Sonderumlage/Ausgleichsbetrag son estimaciones pendientes de los documentos que faltan en el §04. Esto no es asesoramiento legal ni fiscal — haga revisar el contrato de compraventa y el Grundbuch por su Notar y, idealmente, el edificio por un Bausachverständiger (perito) antes de firmar.</p>
+    <p class="sign">Fin del dosier · Bauhofstraße 9 · Ludwigsburg · objetivo 330.000 €</p>
+  </footer>
+
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e)=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay = (Math.min(i,6)*60)+'ms';
+    io.observe(el);
+  });
+  const bars = document.querySelectorAll('.wf-bar');
+  const bo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const w = e.target.style.width; e.target.style.width='0';
+        requestAnimationFrame(()=>{ e.target.style.transition='width .9s cubic-bezier(.2,.7,.2,1)'; e.target.style.width=w; });
+        bo.unobserve(e.target);
+      }
+    });
+  },{threshold:.4});
+  bars.forEach(b=>bo.observe(b));
+</script>
+</body>
+</html>
