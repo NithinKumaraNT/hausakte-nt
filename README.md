@@ -10,6 +10,7 @@ Published via GitHub Pages: **https://nithinkumarant.github.io/hausakte-nt/**
 |----------|-----------------|---------|---------|
 | **Pleidelsheimer Str. 3** — 1971 high-rise flat | €299,000 | [EN](https://nithinkumarant.github.io/hausakte-nt/) | [ES](https://nithinkumarant.github.io/hausakte-nt/es/) |
 | **Bauhofstraße 9, Ludwigsburg** — 2008 condo, WEG unit Nr. 3 | €409,000 → €330,000 | [EN](https://nithinkumarant.github.io/hausakte-nt/bauhofstrasse-9/) | [ES](https://nithinkumarant.github.io/hausakte-nt/bauhofstrasse-9/es/) |
+| **Löchlesäcker 21, Freiberg am Neckar** — 2005 condo, WEG unit D7 (top floor) + garage | €335,000 → €310,000 | [EN](https://nithinkumarant.github.io/hausakte-nt/loechlesaecker-21/) | [ES](https://nithinkumarant.github.io/hausakte-nt/loechlesaecker-21/es/) |
 
 ## Structure
 
@@ -18,6 +19,8 @@ index.html              → Pleidelsheimer Str. 3 (EN)
 es/index.html           → Pleidelsheimer Str. 3 (ES)
 bauhofstrasse-9/index.html      → Bauhofstraße 9 (EN)
 bauhofstrasse-9/es/index.html   → Bauhofstraße 9 (ES)
+loechlesaecker-21/index.html    → Löchlesäcker 21 (EN)
+loechlesaecker-21/es/index.html → Löchlesäcker 21 (ES)
 ```
 
 Each dossier is a self-contained HTML file with an `EN · ES` language toggle.
