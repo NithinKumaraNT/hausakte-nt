@@ -454,12 +454,13 @@
     </div>
     <div class="sec-body">
       <div class="content">
+        <div class="note" style="margin-top:0;margin-bottom:20px"><b>Example loaded:</b> Löchlesäcker 21, Freiberg am Neckar — 2005 condo, WEG unit D7 (top floor) + garage, at the target price of €310.000. Every field below is editable; <b>Reset to example</b> restores these figures.</div>
         <div class="controls">
           <div class="ctrl-group">
             <h3>The flat (facts)</h3>
             <div class="field">
               <label>Purchase price <span class="hint">Kaufpreis</span></label>
-              <input type="number" id="price" value="400000" step="1000" />
+              <input type="number" id="price" value="310000" step="1000" />
             </div>
             <div class="field">
               <label>Bundesland <span class="hint">sets transfer tax</span></label>
@@ -467,11 +468,11 @@
             </div>
             <div class="field">
               <label>Hausgeld / month <span class="hint">incl. reserve</span></label>
-              <input type="number" id="hausgeld" value="300" step="5" />
+              <input type="number" id="hausgeld" value="275" step="5" />
             </div>
             <div class="field">
               <label>Grundsteuer / month <span class="hint">property tax</span></label>
-              <input type="number" id="grundsteuer" value="50" step="1" />
+              <input type="number" id="grundsteuer" value="38" step="1" />
             </div>
             <div class="field">
               <label>Fixed-rate period <span class="hint">Zinsbindung, yrs</span></label>
@@ -492,11 +493,11 @@
             </div>
             <div class="field">
               <label>Initial repayment (Tilgung) <span class="readout" id="tilgungRead">—</span></label>
-              <input type="range" id="tilgung" min="1" max="6" step="0.1" value="2.0" />
+              <input type="range" id="tilgung" min="1" max="6" step="0.1" value="3.0" />
             </div>
             <div class="field">
               <label>Follow-on rate after fix <span class="readout" id="followRead">—</span></label>
-              <input type="range" id="followRate" min="0.5" max="10" step="0.05" value="4.0" />
+              <input type="range" id="followRate" min="0.5" max="10" step="0.05" value="3.8" />
             </div>
             <div class="field">
               <label>Property appreciation / yr <span class="readout" id="apprRead">—</span></label>
@@ -716,8 +717,8 @@ const pct = (n) => n.toFixed(n % 1 === 0 ? 0 : (n*100 % 1 === 0 ? 1 : 2)).replac
 const $ = (id) => document.getElementById(id);
 
 const DEFAULTS = {
-  price:400000, state:"Baden-Württemberg", hausgeld:300, grundsteuer:50, fixYears:15,
-  downPct:20, rate:3.8, tilgung:2.0, followRate:4.0, appr:2.0,
+  price:310000, state:"Baden-Württemberg", hausgeld:275, grundsteuer:38, fixYears:15,
+  downPct:20, rate:3.8, tilgung:3.0, followRate:3.8, appr:2.0,
   reTax:5.0, notar:1.5, grundbuch:0.5, makler:3.57, countRunning:true
 };
 
