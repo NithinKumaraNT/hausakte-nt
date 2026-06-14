@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kaufgutachten — Was kostet diese Wohnung wirklich?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f3eee2;
+    --paper-2:#ece4d3;
+    --surface:#faf7ef;
+    --surface-2:#f7f2e6;
+    --ink:#211d18;
+    --ink-2:#4f4a40;
+    --ink-3:#8a8273;
+    --line:rgba(33,29,24,.13);
+    --line-2:rgba(33,29,24,.30);
+    --asset:#2f6a48;
+    --asset-soft:#d9e6dc;
+    --debt:#b04a2c;
+    --debt-soft:#f0dccf;
+    --gold:#9a7430;
+    --warn:#9a6b1a;
+    --warn-bg:#f5e9cf;
+    --shadow:0 1px 0 rgba(33,29,24,.04), 0 18px 40px -28px rgba(33,29,24,.5);
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Hanken Grotesk", system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* paper grain */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.05;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    padding:64px 0 38px;
+    border-bottom:3px double var(--line-2);
+    position:relative;
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  .kicker::after{content:"";height:1px;flex:1;background:var(--line);}
+  h1.title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.5rem,6vw,4.6rem);
+    line-height:.98;
+    letter-spacing:-.02em;
+    margin:.32em 0 .12em;
+    max-width:14ch;
+  }
+  h1.title em{font-style:italic;color:var(--asset);}
+  .subtitle{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(1.05rem,2.2vw,1.4rem);
+    color:var(--ink-2);
+    max-width:46ch;
+    margin:0 0 26px;
+  }
+  .dateline{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.08em;
+    color:var(--ink-2);
+    text-transform:uppercase;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+  .dateline span{display:flex;gap:8px;align-items:center;}
+  .dateline b{color:var(--ink);font-weight:600;}
+
+  /* ---------- KPI strip ---------- */
+  .kpis{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin:36px 0 12px;
+  }
+  .kpi{
+    background:var(--surface);
+    padding:22px 22px 20px;
+    position:relative;
+  }
+  .kpi .lab{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin-bottom:10px;
+    display:block;
+  }
+  .kpi .val{
+    font-family:var(--serif);
+    font-size:clamp(1.5rem,3vw,2.15rem);
+    font-weight:500;
+    line-height:1;
+    letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;
+  }
+  .kpi .sub{font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;}
+  .kpi.accent .val{color:var(--asset);}
+  .kpi.warn .val{color:var(--debt);}
+
+  /* ---------- Sections ---------- */
+  section{
+    padding:60px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .sec-head{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    align-items:baseline;
+    margin-bottom:34px;
+  }
+  .sec-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--gold);
+    letter-spacing:.1em;
+    padding-top:10px;
+    border-top:2px solid var(--gold);
+  }
+  .sec-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(1.6rem,3.4vw,2.5rem);
+    line-height:1.04;
+    letter-spacing:-.015em;
+    margin:0;
+  }
+  .sec-lede{
+    grid-column:2;
+    color:var(--ink-2);
+    font-size:1.02rem;
+    max-width:64ch;
+    margin-top:14px;
+  }
+  .sec-body{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+  }
+  .sec-body > .content{grid-column:2;}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px 40px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:30px;
+    box-shadow:var(--shadow);
+  }
+  .ctrl-group h3{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 18px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+  }
+  .field{margin-bottom:18px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:13.5px;
+    color:var(--ink-2);
+    margin-bottom:7px;
+    gap:10px;
+  }
+  .field label .hint{font-size:11px;color:var(--ink-3);font-family:var(--mono);}
+  .field .readout{
+    font-family:var(--mono);
+    font-weight:600;
+    color:var(--ink);
+    font-size:13.5px;
+  }
+  input[type="number"], select{
+    width:100%;
+    font-family:var(--mono);
+    font-size:15px;
+    color:var(--ink);
+    background:var(--surface-2);
+    border:1px solid var(--line-2);
+    border-radius:2px;
+    padding:9px 11px;
+    appearance:none;
+  }
+  input[type="number"]:focus, select:focus{
+    outline:none;
+    border-color:var(--asset);
+    box-shadow:0 0 0 3px var(--asset-soft);
+  }
+  select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a8273' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+  input[type="range"]{
+    -webkit-appearance:none;width:100%;height:3px;background:var(--line-2);border-radius:3px;margin:6px 0 2px;cursor:pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--asset);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--asset);cursor:pointer;
+  }
+  input[type="range"]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--asset);border:3px solid var(--surface);cursor:pointer;}
+
+  .toggle-row{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);padding:13px 14px;border-radius:2px;}
+  .toggle-row input{margin-top:3px;width:16px;height:16px;accent-color:var(--asset);cursor:pointer;flex-shrink:0;}
+  .toggle-row span b{color:var(--ink);}
+
+  .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+  button.btn{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid var(--ink);
+    padding:9px 16px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform .12s ease, background .2s ease;
+  }
+  button.btn:hover{transform:translateY(-1px);}
+  button.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2);}
+  button.btn.ghost:hover{background:var(--surface-2);}
+
+  /* ---------- Cost breakdown ---------- */
+  .cost-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:start;}
+  table.ledger{width:100%;border-collapse:collapse;font-size:14.5px;}
+  table.ledger th{
+    text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:500;padding:0 0 10px;border-bottom:1px solid var(--line-2);
+  }
+  table.ledger th.r, table.ledger td.r{text-align:right;font-variant-numeric:tabular-nums;}
+  table.ledger td{padding:11px 0;border-bottom:1px solid var(--line);}
+  table.ledger td.r{font-family:var(--mono);}
+  table.ledger .muted{color:var(--ink-3);font-size:12px;}
+  table.ledger tr.total td{border-bottom:none;border-top:2px solid var(--ink);padding-top:14px;font-weight:600;}
+  table.ledger tr.total td.r{font-family:var(--serif);font-size:1.3rem;}
+  table.ledger tr.grand td{font-weight:600;}
+  table.ledger tr.grand td.r{color:var(--debt);}
+
+  .stackbar{display:flex;flex-direction:column;gap:14px;}
+  .stackbar .bar{display:flex;height:46px;border-radius:3px;overflow:hidden;border:1px solid var(--line-2);}
+  .stackbar .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:11px;font-weight:600;min-width:2px;}
+  .legend{display:flex;flex-direction:column;gap:7px;font-size:13px;}
+  .legend .li{display:flex;align-items:center;gap:9px;color:var(--ink-2);}
+  .legend .sw{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+  .legend .li b{margin-left:auto;font-family:var(--mono);color:var(--ink);font-variant-numeric:tabular-nums;}
+
+  /* ---------- Monthly ---------- */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .stat{background:var(--surface);padding:18px;}
+  .stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);}
+  .stat .v{font-family:var(--serif);font-size:1.55rem;margin-top:8px;font-variant-numeric:tabular-nums;}
+  .stat .v.sm{font-size:1.2rem;}
+  .note{font-size:13.5px;color:var(--ink-2);background:var(--surface-2);border-left:3px solid var(--gold);padding:14px 16px;margin-top:22px;border-radius:0 2px 2px 0;}
+  .note b{color:var(--ink);}
+
+  /* ---------- Chart ---------- */
+  .chart-card{background:var(--surface);border:1px solid var(--line);padding:26px 26px 18px;box-shadow:var(--shadow);}
+  .chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px;}
+  .crossover-badge{font-family:var(--mono);font-size:13px;color:var(--ink-2);}
+  .crossover-badge .big{font-family:var(--serif);font-size:2.2rem;color:var(--asset);display:block;line-height:1;margin-top:4px;font-variant-numeric:tabular-nums;}
+  .chart-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;font-family:var(--mono);}
+  .chart-legend .li{display:flex;align-items:center;gap:8px;color:var(--ink-2);}
+  .chart-legend .ln{width:22px;height:0;border-top-width:3px;border-top-style:solid;}
+  svg.chart{width:100%;height:auto;display:block;}
+  .axis-label{font-family:var(--mono);font-size:10px;fill:var(--ink-3);}
+  .grid-line{stroke:var(--line);stroke-width:1;}
+  .schedule{margin-top:20px;}
+  .schedule summary{cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);padding:12px 0;border-top:1px solid var(--line);list-style:none;}
+  .schedule summary::-webkit-details-marker{display:none;}
+  .schedule summary::before{content:"▸ ";}
+  .schedule[open] summary::before{content:"▾ ";}
+  .sched-scroll{max-height:340px;overflow:auto;border:1px solid var(--line);}
+  table.sched{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px;}
+  table.sched th{position:sticky;top:0;background:var(--paper-2);text-align:right;padding:9px 12px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:600;border-bottom:1px solid var(--line-2);}
+  table.sched th:first-child, table.sched td:first-child{text-align:left;}
+  table.sched td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;}
+  table.sched tr.cross td{background:var(--asset-soft);font-weight:600;}
+
+  /* ---------- Risk flags ---------- */
+  .risk-list{display:grid;gap:14px;}
+  .risk{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:var(--warn-bg);border:1px solid #e3cf9d;border-radius:3px;padding:16px 18px;}
+  .risk .ico{font-family:var(--serif);font-size:1.5rem;color:var(--warn);}
+  .risk .txt{font-size:14px;color:var(--ink-2);}
+  .risk .txt b{color:var(--ink);display:block;font-size:15px;margin-bottom:2px;font-family:var(--sans);}
+  .risk .amt{font-family:var(--mono);font-weight:600;color:var(--warn);text-align:right;font-size:14px;white-space:nowrap;}
+
+  /* ---------- Checklist ---------- */
+  .checkgroup{margin-bottom:30px;}
+  .checkgroup h3{
+    font-family:var(--serif);font-size:1.3rem;font-weight:500;margin:0 0 4px;
+    display:flex;align-items:baseline;gap:12px;
+  }
+  .checkgroup h3 .tag{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em;}
+  .checkgroup .gdesc{font-size:13.5px;color:var(--ink-3);margin:0 0 16px;}
+  ul.qlist{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+  ul.qlist li{background:var(--surface);padding:15px 18px;display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;}
+  ul.qlist li .box{width:15px;height:15px;border:1.5px solid var(--line-2);border-radius:2px;margin-top:4px;}
+  ul.qlist li .q{font-size:14.5px;color:var(--ink);font-weight:500;}
+  ul.qlist li .q .de{font-family:var(--mono);font-size:12px;color:var(--gold);}
+  ul.qlist li .why{font-size:12.5px;color:var(--ink-3);margin-top:4px;}
+
+  /* ---------- Loan types ---------- */
+  .loan-grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .loan{background:var(--surface);padding:22px 24px;display:grid;grid-template-columns:1fr;gap:10px;}
+  .loan .lh{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .loan .lh h4{font-family:var(--serif);font-size:1.35rem;font-weight:500;margin:0;}
+  .loan .lh .de{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);}
+  .loan .fit{font-size:13px;color:var(--asset);font-family:var(--mono);}
+  .loan p{margin:0;font-size:14px;color:var(--ink-2);}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:4px;}
+  .pc ul{margin:0;padding:0;list-style:none;font-size:13.5px;}
+  .pc li{padding:4px 0 4px 22px;position:relative;color:var(--ink-2);}
+  .pc .pro li::before{content:"+";position:absolute;left:2px;color:var(--asset);font-weight:700;}
+  .pc .con li::before{content:"–";position:absolute;left:4px;color:var(--debt);font-weight:700;}
+  .pc h5{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 6px;color:var(--ink-3);}
+
+  /* ---------- Glossary & sources ---------- */
+  .glossary{columns:2;column-gap:40px;}
+  .glossary dt{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--asset);margin-top:14px;break-after:avoid;}
+  .glossary dd{margin:3px 0 0;font-size:13.5px;color:var(--ink-2);break-inside:avoid;}
+  .glossary dl{margin:0;}
+  .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px;}
+  .sources a{background:var(--surface);padding:16px 18px;text-decoration:none;color:var(--ink);display:block;transition:background .2s;}
+  .sources a:hover{background:var(--surface-2);}
+  .sources a .nm{font-family:var(--serif);font-size:1.05rem;}
+  .sources a .ds{font-size:12px;color:var(--ink-3);margin-top:3px;}
+  .sources a .ar{font-family:var(--mono);font-size:11px;color:var(--gold);margin-top:6px;}
+
+  footer{padding:50px 0 70px;color:var(--ink-3);font-size:12.5px;}
+  footer .disc{max-width:70ch;line-height:1.7;}
+  footer b{color:var(--ink-2);}
+
+  /* entrance animation */
+  @keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+  .anim{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+
+  /* responsive */
+  @media (max-width:860px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .controls{grid-template-columns:1fr;}
+    .cost-grid{grid-template-columns:1fr;}
+    .sec-head,.sec-body{grid-template-columns:1fr;}
+    .sec-num{border-top:none;padding-top:0;}
+    .sec-lede,.sec-body>.content{grid-column:1;}
+    .glossary{columns:1;}
+    .pc{grid-template-columns:1fr;}
+  }
+  @media print{
+    body{background:#fff;font-size:12px;}
+    body::before{display:none;}
+    button,input[type="range"]{display:none;}
+    section{break-inside:avoid;}
+    .anim{animation:none;opacity:1;}
+    .chart-card,.controls{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker anim" style="animation-delay:.05s">Kaufgutachten · Eigentumswohnung · Deutschland</div>
+    <h1 class="title anim" style="animation-delay:.12s">Was kostet diese Wohnung <em>wirklich?</em></h1>
+    <p class="subtitle anim" style="animation-delay:.2s">A total-cost-of-ownership and asset-vs-liability model for buying a flat in Germany — every hidden euro, and the year it stops being a liability. Enter your own numbers; everything recalculates live.</p>
+    <div class="dateline anim" style="animation-delay:.28s">
+      <span><b>Total cost of ownership</b></span>
+      <span>Hidden Kaufnebenkosten</span>
+      <span>Asset-vs-liability break-even</span>
+      <span>Advisor checklist &amp; loan types</span>
+    </div>
+
+    <div class="kpis anim" style="animation-delay:.36s">
+      <div class="kpi">
+        <span class="lab">Real price incl. costs</span>
+        <span class="val" id="kpiRealPrice">—</span>
+        <span class="sub" id="kpiRealPriceSub">sticker + Kaufnebenkosten</span>
+      </div>
+      <div class="kpi warn">
+        <span class="lab">Cash you need at close</span>
+        <span class="val" id="kpiCash">—</span>
+        <span class="sub" id="kpiCashSub">down payment + fees</span>
+      </div>
+      <div class="kpi">
+        <span class="lab">Total monthly burden</span>
+        <span class="val" id="kpiMonthly">—</span>
+        <span class="sub" id="kpiMonthlySub">loan + Hausgeld + tax</span>
+      </div>
+      <div class="kpi accent">
+        <span class="lab">Becomes an asset in</span>
+        <span class="val" id="kpiBreakeven">—</span>
+        <span class="sub">equity overtakes everything sunk</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 01 INPUTS ============ -->
+  <section id="inputs">
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2 class="sec-title">Assumptions</h2>
+      <p class="sec-lede">Start with the example figures below, then replace every one with your own — price, region, deposit, rate, fees. Each figure recalculates live in your browser. Nothing leaves this page; it runs entirely on static GitHub Pages.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <div class="controls">
+          <div class="ctrl-group">
+            <h3>The flat (facts)</h3>
+            <div class="field">
+              <label>Purchase price <span class="hint">Kaufpreis</span></label>
+              <input type="number" id="price" value="400000" step="1000" />
+            </div>
+            <div class="field">
+              <label>Bundesland <span class="hint">sets transfer tax</span></label>
+              <select id="state"></select>
+            </div>
+            <div class="field">
+              <label>Hausgeld / month <span class="hint">incl. reserve</span></label>
+              <input type="number" id="hausgeld" value="300" step="5" />
+            </div>
+            <div class="field">
+              <label>Grundsteuer / month <span class="hint">property tax</span></label>
+              <input type="number" id="grundsteuer" value="50" step="1" />
+            </div>
+            <div class="field">
+              <label>Fixed-rate period <span class="hint">Zinsbindung, yrs</span></label>
+              <input type="number" id="fixYears" value="15" step="1" min="1" max="40" />
+            </div>
+          </div>
+
+          <div class="ctrl-group">
+            <h3>The deal (what-if)</h3>
+            <div class="field">
+              <label>Down payment <span class="readout" id="downRead">—</span></label>
+              <input type="range" id="downPct" min="0" max="50" step="1" value="20" />
+              <label style="margin-top:2px"><span class="hint">% Eigenkapital → loan amount</span><span class="hint" id="loanRead">—</span></label>
+            </div>
+            <div class="field">
+              <label>Interest rate (Sollzins) <span class="readout" id="rateRead">—</span></label>
+              <input type="range" id="rate" min="0.5" max="8" step="0.05" value="3.8" />
+            </div>
+            <div class="field">
+              <label>Initial repayment (Tilgung) <span class="readout" id="tilgungRead">—</span></label>
+              <input type="range" id="tilgung" min="1" max="6" step="0.1" value="2.0" />
+            </div>
+            <div class="field">
+              <label>Follow-on rate after fix <span class="readout" id="followRead">—</span></label>
+              <input type="range" id="followRate" min="0.5" max="10" step="0.05" value="4.0" />
+            </div>
+            <div class="field">
+              <label>Property appreciation / yr <span class="readout" id="apprRead">—</span></label>
+              <input type="range" id="appr" min="-2" max="6" step="0.1" value="2.0" />
+            </div>
+          </div>
+
+          <div class="ctrl-group" style="grid-column:1/-1">
+            <h3>Closing-cost rates (Kaufnebenkosten %)</h3>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px">
+              <div class="field"><label>Grunderwerb­steuer</label><input type="number" id="reTax" value="5.0" step="0.1" /></div>
+              <div class="field"><label>Notar</label><input type="number" id="notar" value="1.5" step="0.1" /></div>
+              <div class="field"><label>Grundbuch</label><input type="number" id="grundbuch" value="0.5" step="0.1" /></div>
+              <div class="field"><label>Makler (Courtage)</label><input type="number" id="makler" value="3.57" step="0.01" /></div>
+            </div>
+          </div>
+
+          <div class="ctrl-group" style="grid-column:1/-1">
+            <label class="toggle-row">
+              <input type="checkbox" id="countRunning" checked />
+              <span><b>Count running costs (Hausgeld + Grundsteuer) as money sunk</b> when deciding the asset/liability crossover. Off = treat them as consumption you'd pay as rent anyway, which makes the break-even arrive much sooner.</span>
+            </label>
+            <div class="btn-row" style="margin-top:14px">
+              <button class="btn" type="button" id="resetBtn">↺ Reset to example</button>
+              <button class="btn ghost" type="button" onclick="window.print()">⎙ Print this report</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 KAUFNEBENKOSTEN ============ -->
+  <section id="costs">
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <h2 class="sec-title">The hidden costs</h2>
+      <p class="sec-lede">In Germany the sticker price is only the beginning. <b>Kaufnebenkosten</b> — transfer tax, notary, land registry and broker — add roughly 10% on top, and banks almost never finance them. This is real cash, gone the day you sign.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <div class="cost-grid">
+          <div>
+            <table class="ledger">
+              <thead><tr><th>Item</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead>
+              <tbody id="costRows"></tbody>
+            </table>
+          </div>
+          <div>
+            <div class="stackbar">
+              <div class="bar" id="costBar"></div>
+              <div class="legend" id="costLegend"></div>
+            </div>
+            <div class="note"><b>Why it stings:</b> these costs add nothing to the property's resale value. On day one you are "underwater" by exactly this amount — which is why the asset/liability crossover in §04 starts in the red.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 MONTHLY ============ -->
+  <section id="monthly">
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <h2 class="sec-title">The monthly reality &amp; the loan</h2>
+      <p class="sec-lede">A German <b>Annuitätendarlehen</b> keeps your monthly payment constant; early on most of it is interest, and the principal share grows over time. Here's the burden, and what's still owed when your fixed rate expires.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <div class="stat-row">
+          <div class="stat"><div class="l">Loan amount</div><div class="v sm" id="mLoan">—</div></div>
+          <div class="stat"><div class="l">Monthly annuity</div><div class="v" id="mAnnuity">—</div></div>
+          <div class="stat"><div class="l">+ Hausgeld + tax</div><div class="v sm" id="mRunning">—</div></div>
+          <div class="stat"><div class="l">Total / month</div><div class="v" id="mTotal">—</div></div>
+        </div>
+        <div class="stat-row" style="margin-top:18px">
+          <div class="stat"><div class="l">Interest over fix</div><div class="v sm" id="mIntFix">—</div></div>
+          <div class="stat"><div class="l">Principal repaid in fix</div><div class="v sm" id="mPrinFix">—</div></div>
+          <div class="stat"><div class="l">Owed at fix end</div><div class="v sm" id="mBalFix">—</div></div>
+          <div class="stat"><div class="l">Loan fully repaid in</div><div class="v sm" id="mPayoff">—</div></div>
+        </div>
+        <div class="note"><b>Anschlussfinanzierung risk:</b> <span id="anschlussNote">—</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 ASSET VS LIABILITY ============ -->
+  <section id="breakeven">
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <h2 class="sec-title">Asset, or liability?</h2>
+      <p class="sec-lede">The honest question. Your <b style="color:var(--asset)">equity</b> (what the flat is worth minus what you still owe) climbs as you repay principal and the market moves. Against it sits everything you've <b style="color:var(--debt)">truly sunk</b>: down payment, closing costs, interest and running costs — principal excluded, because that's forced savings, not a cost. Where green overtakes rust, it's genuinely an asset.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <div class="chart-card">
+          <div class="chart-head">
+            <div class="crossover-badge">
+              It turns net-positive in
+              <span class="big" id="crossYear">—</span>
+            </div>
+            <div class="chart-legend">
+              <div class="li"><span class="ln" style="border-top-color:var(--asset)"></span>Equity (value − loan)</div>
+              <div class="li"><span class="ln" style="border-top-color:var(--debt)"></span>Cash sunk</div>
+              <div class="li"><span class="ln" style="border-top-color:var(--gold);border-top-style:dashed"></span>Property value</div>
+            </div>
+          </div>
+          <svg class="chart" id="chart" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Equity versus cash sunk over time"></svg>
+          <details class="schedule">
+            <summary>Year-by-year schedule</summary>
+            <div class="sched-scroll">
+              <table class="sched">
+                <thead><tr><th>Year</th><th>Property value</th><th>Loan left</th><th>Equity</th><th>Cash sunk</th><th>Net</th></tr></thead>
+                <tbody id="schedBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div class="note"><b>Read it honestly:</b> <span id="breakevenNote">—</span> This model assumes equity = gross resale value; in a real sale you'd subtract agent fees and possibly tax (Spekulationssteuer if sold within 10 years). Toggle running costs in §01 to see both readings.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 RISK FLAGS ============ -->
+  <section id="risks">
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <h2 class="sec-title">Red flags to investigate</h2>
+      <p class="sec-lede">None of these show up in the asking price, yet each is a future Sonderumlage (special levy) waiting to happen. For any Eigentumswohnung, check every one with the seller and in the Eigentümerversammlung protocols before you sign.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <div class="risk-list">
+          <div class="risk"><div class="ico">⚠</div><div class="txt"><b>Deferred major works</b>Roof, façade, windows or balconies the WEG has postponed. Your ownership share (MEA) of the eventual bill lands as a special levy — ask what's been voted on versus merely "discussed".</div><div class="amt">ask the WEG</div></div>
+          <div class="risk"><div class="ico">⚙</div><div class="txt"><b>Ageing building services</b>Heating, lift and pipework past ~15–20 years. Replacement is shared across all owners and is rarely fully covered by the reserve.</div><div class="amt">check the age</div></div>
+          <div class="risk"><div class="ico">€</div><div class="txt"><b>Thin maintenance reserve</b>A low Instandhaltungsrücklage for the building's age all but guarantees future levies. Weigh the reserve per unit against the age and condition.</div><div class="amt">reserve / unit</div></div>
+          <div class="risk"><div class="ico">⬍</div><div class="txt"><b>Seller's outstanding liens</b>Existing Grundschulden (land charges) must be cleared by the seller at closing. Confirm the Notar deletes them before your funds are released.</div><div class="amt">Lastenfreistellung</div></div>
+          <div class="risk"><div class="ico">↑</div><div class="txt"><b>Price above the local average</b>Compare €/m² against the street and town. A premium can be justified by condition or location — but make sure it actually is.</div><div class="amt">€/m² vs area</div></div>
+          <div class="risk"><div class="ico">⚡</div><div class="txt"><b>Energy certificate</b>An old or poor-class Energieausweis signals renovation pressure (GEG rules) and higher running costs. Get the certificate and its expiry date.</div><div class="amt">Energieausweis</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 ADVISOR QUESTIONS ============ -->
+  <section id="advisor">
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <h2 class="sec-title">Questions for your advisor</h2>
+      <p class="sec-lede">A printable checklist for the Finanzierungsberater / bank. German term in <span class="de" style="font-family:var(--mono);color:var(--gold)">mono</span> so you can say it out loud. Tick them off as you go — print this page (§01 button) and bring it.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content" id="checklist"></div>
+    </div>
+  </section>
+
+  <!-- ============ 07 LOAN TYPES ============ -->
+  <section id="loans">
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <h2 class="sec-title">German loan types, decoded</h2>
+      <p class="sec-lede">The realistic menu a bank or broker (Interhyp, Dr. Klein) will lay out. Most buyers land on a plain Annuitätendarlehen, often blended with a KfW loan.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content"><div class="loan-grid" id="loanGrid"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 08 GLOSSARY + SOURCES ============ -->
+  <section id="glossary">
+    <div class="sec-head">
+      <div class="sec-num">08</div>
+      <h2 class="sec-title">Glossary &amp; sources</h2>
+      <p class="sec-lede">The vocabulary you'll hear across the table, and where to verify everything yourself.</p>
+    </div>
+    <div class="sec-body">
+      <div class="content">
+        <dl class="glossary" id="glossaryList"></dl>
+        <h3 style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:34px 0 14px">Official &amp; independent sources</h3>
+        <div class="sources" id="sources"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p class="disc"><b>Disclaimer.</b> This is a personal planning tool, not financial, tax or legal advice. Every figure is an editable assumption and the example defaults are illustrative only. Grunderwerbsteuer rates change by Bundesland and over time — verify the current rate. Confirm all numbers with your Notar, bank, Steuerberater and the WEG's Protokolle before signing anything. All computation runs locally in your browser; no data is sent anywhere.</p>
+</footer>
+
+<script>
+"use strict";
+
+const STATES = [
+  ["Baden-Württemberg", 5.0],
+  ["Bayern", 3.5],
+  ["Berlin", 6.0],
+  ["Brandenburg", 6.5],
+  ["Bremen", 5.0],
+  ["Hamburg", 5.5],
+  ["Hessen", 6.0],
+  ["Mecklenburg-Vorpommern", 6.0],
+  ["Niedersachsen", 5.0],
+  ["Nordrhein-Westfalen", 6.5],
+  ["Rheinland-Pfalz", 5.0],
+  ["Saarland", 6.5],
+  ["Sachsen", 5.5],
+  ["Sachsen-Anhalt", 5.0],
+  ["Schleswig-Holstein", 6.5],
+  ["Thüringen", 5.0],
+];
+
+const eur = new Intl.NumberFormat("de-DE", {style:"currency", currency:"EUR", maximumFractionDigits:0});
+const eur2 = new Intl.NumberFormat("de-DE", {style:"currency", currency:"EUR", maximumFractionDigits:0});
+const pct = (n) => n.toFixed(n % 1 === 0 ? 0 : (n*100 % 1 === 0 ? 1 : 2)).replace(".", ",") + " %";
+
+const $ = (id) => document.getElementById(id);
+
+const DEFAULTS = {
+  price:400000, state:"Baden-Württemberg", hausgeld:300, grundsteuer:50, fixYears:15,
+  downPct:20, rate:3.8, tilgung:2.0, followRate:4.0, appr:2.0,
+  reTax:5.0, notar:1.5, grundbuch:0.5, makler:3.57, countRunning:true
+};
+
+// ---- build state dropdown ----
+(function(){
+  const sel = $("state");
+  STATES.forEach(([name, rate]) => {
+    const o = document.createElement("option");
+    o.value = name; o.textContent = `${name} — ${pct(rate)}`;
+    if (name === DEFAULTS.state) o.selected = true;
+    sel.appendChild(o);
+  });
+})();
+
+function readInputs(){
+  const price = +$("price").value || 0;
+  const downPct = +$("downPct").value;
+  const s = {
+    price,
+    hausgeld:+$("hausgeld").value || 0,
+    grundsteuer:+$("grundsteuer").value || 0,
+    fixYears:Math.max(1, +$("fixYears").value || 1),
+    downPct,
+    rate:+$("rate").value,
+    tilgung:+$("tilgung").value,
+    followRate:+$("followRate").value,
+    appr:+$("appr").value,
+    reTax:+$("reTax").value || 0,
+    notar:+$("notar").value || 0,
+    grundbuch:+$("grundbuch").value || 0,
+    makler:+$("makler").value || 0,
+    countRunning:$("countRunning").checked,
+  };
+  s.downPayment = price * downPct/100;
+  s.loan = price - s.downPayment;
+  s.closingPct = s.reTax + s.notar + s.grundbuch + s.makler;
+  s.closing = price * s.closingPct/100;
+  s.runningYear = (s.hausgeld + s.grundsteuer) * 12;
+  return s;
+}
+
+// ---- live readouts ----
+function updateReadouts(s){
+  $("downRead").textContent = pct(s.downPct) + " · " + eur.format(s.downPayment);
+  $("loanRead").textContent = "loan " + eur.format(s.loan);
+  $("rateRead").textContent = pct(s.rate);
+  $("tilgungRead").textContent = pct(s.tilgung);
+  $("followRead").textContent = pct(s.followRate);
+  $("apprRead").textContent = (s.appr<0?"":"+") + pct(s.appr);
+}
+
+// ---- amortization + projection ----
+function project(s){
+  const fixMonths = s.fixYears * 12;
+  const mAnnuity = s.loan * ((s.rate + s.tilgung)/100) / 12; // constant during fix
+  let bal = s.loan;
+  let cumInterest = 0;
+  let intFix = 0;
+  let balFix = s.loan;
+  const yearly = [];
+  const maxYears = 45;
+
+  const snap = (yr) => {
+    const value = s.price * Math.pow(1 + s.appr/100, yr);
+    const equity = value - bal;
+    const running = s.countRunning ? s.runningYear * yr : 0;
+    const invested = s.downPayment + s.closing + cumInterest + running;
+    yearly.push({ yr, value, bal:Math.max(bal,0), equity, invested });
+  };
+  snap(0);
+
+  let payoffMonth = null;
+  for (let m=1; m<=maxYears*12; m++){
+    const inFix = m <= fixMonths;
+    const mRate = (inFix ? s.rate : s.followRate)/100/12;
+    // after fix, keep paying the same monthly amount at the new rate
+    const pay = mAnnuity;
+    const interest = bal * mRate;
+    let principal = pay - interest;
+    if (principal <= 0) principal = 0; // payment can't cover interest -> no amortization
+    if (principal > bal) principal = bal;
+    bal -= principal;
+    cumInterest += interest;
+    if (inFix) intFix += interest;
+    if (m === fixMonths) balFix = bal;
+    if (bal <= 0.5 && payoffMonth === null) payoffMonth = m;
+    if (m % 12 === 0) snap(m/12);
+    if (bal <= 0.5) {
+      // fill remaining yearly snapshots flat
+      if (m % 12 !== 0) snap(Math.ceil(m/12));
+      break;
+    }
+  }
+
+  // crossover (equity >= invested), interpolated
+  let crossYear = null;
+  for (let i=1; i<yearly.length; i++){
+    const a = yearly[i-1], b = yearly[i];
+    const d0 = a.equity - a.invested, d1 = b.equity - b.invested;
+    if (d0 < 0 && d1 >= 0){
+      const frac = d0 === d1 ? 0 : -d0/(d1-d0);
+      crossYear = (i-1) + frac;
+      break;
+    }
+  }
+
+  return {
+    yearly, mAnnuity, intFix, balFix, payoffMonth, crossYear,
+    fixMonths, principalFix: s.loan - balFix,
+    neverCrosses: crossYear === null,
+  };
+}
+
+// ---- renderers ----
+function renderKPIs(s, p){
+  $("kpiRealPrice").textContent = eur.format(s.price + s.closing);
+  $("kpiRealPriceSub").textContent = eur.format(s.price) + " + " + eur.format(s.closing) + " costs";
+  $("kpiCash").textContent = eur.format(s.downPayment + s.closing);
+  $("kpiCashSub").textContent = pct(s.downPct) + " down + Kaufnebenkosten";
+  const monthly = p.mAnnuity + s.hausgeld + s.grundsteuer;
+  $("kpiMonthly").textContent = eur.format(monthly);
+  $("kpiMonthlySub").textContent = eur.format(p.mAnnuity) + " loan + " + eur.format(s.hausgeld+s.grundsteuer);
+  $("kpiBreakeven").textContent = p.neverCrosses ? "> 45 yrs" : ("Year " + Math.ceil(p.crossYear));
+}
+
+function renderCosts(s){
+  const items = [
+    ["Grunderwerbsteuer", s.reTax, "Transfer tax — paid to the state"],
+    ["Notar", s.notar, "Notary — purchase contract & escrow"],
+    ["Grundbuch", s.grundbuch, "Land registry — ownership entry"],
+    ["Makler (Courtage)", s.makler, "Broker commission incl. VAT"],
+  ];
+  const colors = ["#b04a2c","#c9772f","#9a7430","#7a8a3c"];
+  let rows = "";
+  items.forEach((it,i) => {
+    const amt = s.price * it[1]/100;
+    rows += `<tr><td>${it[0]}<div class="muted">${it[2]}</div></td><td class="r">${pct(it[1])}</td><td class="r">${eur.format(amt)}</td></tr>`;
+  });
+  rows += `<tr class="total"><td>Total Kaufnebenkosten</td><td class="r">${pct(s.closingPct)}</td><td class="r">${eur.format(s.closing)}</td></tr>`;
+  rows += `<tr class="grand"><td>True acquisition cost</td><td class="r"></td><td class="r">${eur.format(s.price + s.closing)}</td></tr>`;
+  $("costRows").innerHTML = rows;
+
+  // stacked bar: price + each cost
+  const total = s.price + s.closing;
+  const segs = [["Kaufpreis", s.price, "#2f6a48"]].concat(items.map((it,i)=>[it[0], s.price*it[1]/100, colors[i]]));
+  let bar = "", legend = "";
+  segs.forEach(([lab,val,col]) => {
+    const w = (val/total*100);
+    bar += `<div class="seg" style="background:${col};width:${w}%">${w>9?Math.round(w)+"%":""}</div>`;
+    legend += `<div class="li"><span class="sw" style="background:${col}"></span>${lab}<b>${eur.format(val)}</b></div>`;
+  });
+  $("costBar").innerHTML = bar;
+  $("costLegend").innerHTML = legend;
+}
+
+function renderMonthly(s, p){
+  $("mLoan").textContent = eur.format(s.loan);
+  $("mAnnuity").textContent = eur.format(p.mAnnuity);
+  $("mRunning").textContent = eur.format(s.hausgeld + s.grundsteuer);
+  $("mTotal").textContent = eur.format(p.mAnnuity + s.hausgeld + s.grundsteuer);
+  $("mIntFix").textContent = eur.format(p.intFix);
+  $("mPrinFix").textContent = eur.format(p.principalFix);
+  $("mBalFix").textContent = eur.format(p.balFix);
+  $("mPayoff").textContent = p.payoffMonth ? ((p.payoffMonth/12).toFixed(1).replace(".",",") + " yrs") : "> 45 yrs";
+
+  const balFixFmt = eur.format(p.balFix);
+  if (p.balFix > 1){
+    const stressPay = p.balFix * (0.05 + 0.02)/12; // illustrative 5% + 2% tilgung
+    $("anschlussNote").innerHTML = `After your ${s.fixYears}-year fix you'll still owe <b>${balFixFmt}</b> and must re-finance (Anschlussfinanzierung) at whatever rates exist then. The follow-on slider lets you stress this — at the current ${pct(s.followRate)} follow-on assumption you keep paying ${eur.format(p.mAnnuity)}/mo. If rates were 5% with 2% Tilgung, that residual would cost ≈ <b>${eur.format(stressPay)}/mo</b>. Consider a longer Zinsbindung or a Forward-Darlehen to lock today's rate.`;
+  } else {
+    $("anschlussNote").textContent = "The loan is fully repaid within the fixed-rate period — no Anschlussfinanzierung risk under these assumptions.";
+  }
+}
+
+function renderChart(s, p){
+  const W=760, H=380, padL=64, padR=24, padT=20, padB=42;
+  const yrs = p.yearly;
+  const lastYr = yrs[yrs.length-1].yr;
+  const maxVal = Math.max(...yrs.map(y=>Math.max(y.value, y.invested, y.equity)));
+  // nice max
+  const mag = Math.pow(10, Math.floor(Math.log10(maxVal)));
+  const niceMax = Math.ceil(maxVal/(mag/2))*(mag/2);
+
+  const x = (yr)=> padL + (yr/lastYr)*(W-padL-padR);
+  const y = (v)=> H-padB - (v/niceMax)*(H-padT-padB);
+
+  let svg = "";
+  // gridlines + y labels
+  const yTicks = 5;
+  for (let i=0;i<=yTicks;i++){
+    const v = niceMax*i/yTicks;
+    const yy = y(v);
+    svg += `<line class="grid-line" x1="${padL}" y1="${yy}" x2="${W-padR}" y2="${yy}"/>`;
+    svg += `<text class="axis-label" x="${padL-8}" y="${yy+3}" text-anchor="end">${Math.round(v/1000)}k</text>`;
+  }
+  // x labels every 5 yrs
+  for (let yr=0; yr<=lastYr; yr+=5){
+    svg += `<text class="axis-label" x="${x(yr)}" y="${H-padB+18}" text-anchor="middle">${yr}</text>`;
+  }
+  svg += `<text class="axis-label" x="${(padL+W-padR)/2}" y="${H-4}" text-anchor="middle">Years of ownership</text>`;
+
+  const line = (key, color, dash=false, w=2.5)=>{
+    const pts = yrs.map(o=>`${x(o.yr).toFixed(1)},${y(o[key]).toFixed(1)}`).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="${w}" ${dash?'stroke-dasharray="5 5"':''} stroke-linejoin="round"/>`;
+  };
+
+  // area between equity & invested after crossover (subtle)
+  // property value (faint dashed)
+  svg += line("value", "var(--gold)", true, 1.6);
+  svg += line("invested", "var(--debt)", false, 2.6);
+  svg += line("equity", "var(--asset)", false, 2.6);
+
+  // crossover marker
+  if (!p.neverCrosses){
+    const cx = x(p.crossYear);
+    // value at crossover via interpolation on equity
+    const i = Math.ceil(p.crossYear);
+    const a = yrs[i-1], b = yrs[i] || a;
+    const frac = p.crossYear-(i-1);
+    const cv = a.equity + (b.equity-a.equity)*frac;
+    const cy = y(cv);
+    svg += `<line x1="${cx}" y1="${padT}" x2="${cx}" y2="${H-padB}" stroke="var(--asset)" stroke-width="1" stroke-dasharray="3 4" opacity=".6"/>`;
+    svg += `<circle cx="${cx}" cy="${cy}" r="6" fill="var(--asset)" stroke="var(--surface)" stroke-width="2.5"/>`;
+    svg += `<text class="axis-label" x="${cx}" y="${padT+2}" text-anchor="middle" style="fill:var(--asset);font-weight:600">▲ asset from yr ${Math.ceil(p.crossYear)}</text>`;
+  }
+
+  $("chart").innerHTML = svg;
+
+  // badge + note
+  if (p.neverCrosses){
+    $("crossYear").textContent = "> 45 yrs";
+    $("breakevenNote").innerHTML = `Under these assumptions equity never overtakes what you've sunk within 45 years — usually a sign appreciation is too low or running costs too high relative to the price. Try a higher appreciation rate, a lower price, or untick "count running costs".`;
+  } else {
+    const cy = Math.ceil(p.crossYear);
+    $("crossYear").textContent = "Year " + cy;
+    const cross = p.yearly[cy] || p.yearly[p.yearly.length-1];
+    $("breakevenNote").innerHTML = `From <b>year ${cy}</b> the flat's equity (≈ ${eur.format(cross.equity)}) exceeds every euro you've sunk (≈ ${eur.format(cross.invested)}) — past this point selling would leave you net-positive. Before it, an early exit means a loss, largely because of the ${eur.format(s.closing)} in non-recoverable closing costs.`;
+  }
+
+  // schedule
+  let rows = "";
+  yrs.forEach(o=>{
+    const net = o.equity - o.invested;
+    const isCross = !p.neverCrosses && o.yr === Math.ceil(p.crossYear);
+    rows += `<tr class="${isCross?'cross':''}"><td>${o.yr}</td><td>${eur.format(o.value)}</td><td>${eur.format(o.bal)}</td><td>${eur.format(o.equity)}</td><td>${eur.format(o.invested)}</td><td style="color:${net>=0?'var(--asset)':'var(--debt)'}">${net>=0?'+':''}${eur.format(net)}</td></tr>`;
+  });
+  $("schedBody").innerHTML = rows;
+}
+
+// ---- main recompute ----
+function recompute(){
+  const s = readInputs();
+  updateReadouts(s);
+  const p = project(s);
+  renderKPIs(s, p);
+  renderCosts(s);
+  renderMonthly(s, p);
+  renderChart(s, p);
+}
+
+// ---- static content (checklist, loans, glossary, sources) ----
+function renderStatic(){
+  const groups = [
+    ["A","Rate & lock","The single biggest lever on lifetime cost.",[
+      ["What's the effective annual rate, not just the nominal rate?","Effektivzins vs Sollzins","Effektivzins includes most fees and is the only fair way to compare offers."],
+      ["How long can I fix the rate, and what does each option cost?","Zinsbindung","Longer fixes cost a little more now but remove re-financing risk. 10/15/20/30 yrs are common."],
+      ["What happens at the end of the fixed period?","Anschlussfinanzierung","You'll re-finance the residual at unknown future rates — understand the exposure."],
+      ["Can I lock today's rate for a future drawdown?","Forward-Darlehen","Useful if you expect rates to rise before your current fix ends."],
+    ]],
+    ["B","Repayment & flexibility","Small changes here move the payoff date by years.",[
+      ["What initial repayment rate do you recommend, and why?","Tilgung","Higher Tilgung = faster payoff, less lifetime interest, but higher monthly cost."],
+      ["How much can I overpay each year for free?","Sondertilgung","Typically 5% of the loan/yr free. It dramatically shortens the loan — get it in writing."],
+      ["Can I change my repayment rate later without cost?","Tilgungssatzwechsel","Flexibility for when income changes; some banks allow 1–3 free switches."],
+    ]],
+    ["C","Costs, fees & penalties","The fine print that quietly adds up.",[
+      ["What's the prepayment penalty if I repay or sell early?","Vorfälligkeitsentschädigung","Can be steep within the fixed period — matters a lot given the §04 break-even."],
+      ["Are there commitment-interest charges if drawdown is delayed?","Bereitstellungszinsen","Relevant for new-builds; ask how many months are free."],
+      ["Any account, valuation or estimate fees?","Konto-/Schätzkosten","Bundle these into the Effektivzins comparison."],
+    ]],
+    ["D","Loan structure & subsidies","Where free money and better terms hide.",[
+      ["What loan-to-value am I at, and how does it affect my rate?","Beleihungsauslauf","Below ~60% and ~80% LTV are pricing thresholds — more equity can cut the rate."],
+      ["Do you value the property below the purchase price?","Beleihungswert","Banks lend against their valuation, not the price — a gap means more equity needed."],
+      ["Am I eligible for any KfW programmes?","KfW-Förderung","Subsidised loans/grants for energy efficiency or families — often stackable."],
+      ["Should part of this be a Bausparvertrag?","Bauspar-Kombi","Can hedge future rates; compare honestly against a plain annuity — it's not always worth it."],
+    ]],
+    ["E","The flat itself","Condo-specific landmines.",[
+      ["Is the maintenance reserve adequate for the building's age?","Instandhaltungsrücklage","An older building with ageing heating/lift needs a healthy reserve, or Sonderumlagen loom."],
+      ["What major works are planned, and what's my share?","Sonderumlage","Your MEA share of any deferred roof/façade/lift work becomes a special levy — confirm timing and whether it's priced in."],
+      ["Show me the last 3 years of owners'-meeting minutes.","Protokolle der Eigentümerversammlung","Reveals disputes, planned works and special levies the listing won't mention."],
+      ["How has the Hausgeld changed over 5 years?","Hausgeld-Entwicklung","Rising Hausgeld erodes the §03 monthly math and the §04 break-even."],
+      ["Is the seller's Grundschuld cleared at closing?","Lastenfreistellung","Any existing liens on the property must be deleted before your money is released."],
+    ]],
+    ["F","You & the risk","Stress-test your own situation.",[
+      ["What monthly payment is realistic if I lose income for 6 months?","Haushaltsrechnung","Banks model this; you should too, including the running costs in §03."],
+      ["What's my residual debt if I have to sell in year 5?","Restschuld","Cross-check against §04 — selling before break-even means a real loss."],
+      ["Do I need residual-debt or building insurance?","Restschuld-/Wohngebäudeversicherung","Wohngebäude is usually mandatory via the WEG; residual-debt cover is optional."],
+    ]],
+  ];
+
+  let html = "";
+  groups.forEach(([tag,title,desc,qs])=>{
+    let lis = "";
+    qs.forEach(([q,de,why])=>{
+      lis += `<li><span class="box"></span><div><div class="q">${q} <span class="de">· ${de}</span></div><div class="why">${why}</div></div></li>`;
+    });
+    html += `<div class="checkgroup"><h3><span class="tag">${tag}</span>${title}</h3><p class="gdesc">${desc}</p><ul class="qlist">${lis}</ul></div>`;
+  });
+  $("checklist").innerHTML = html;
+
+  const loans = [
+    ["Annuitätendarlehen","Annuity loan","The standard. Best for most owner-occupiers.",
+      ["Constant, predictable monthly payment","Rate locked for the Zinsbindung","Sondertilgung options common"],
+      ["Residual debt remains after the fix","Re-financing risk at follow-on","Most interest paid in early years"]],
+    ["Volltilgerdarlehen","Full-repayment loan","Fully repaid within the fixed period — zero residual.",
+      ["No Anschlussfinanzierung risk at all","Often a small rate discount","Total cost known up front"],
+      ["Higher monthly payment","Little flexibility once set","Needs strong, stable income"]],
+    ["KfW-Förderdarlehen","State promotional loan","Subsidised top-up, usually alongside a bank loan.",
+      ["Below-market rates / grants","Energy-efficiency & family programmes","Stackable with a main loan"],
+      ["Capped amounts","Conditions & paperwork","Must apply before signing/works"]],
+    ["Bausparvertrag / Bauspardarlehen","Building-society savings + loan","Save now, draw a fixed-rate loan later.",
+      ["Locks a future loan rate today","Disciplined saving phase","Hedges rising rates"],
+      ["Low interest on savings phase","Closing fees (Abschlussgebühr)","Often underperforms a plain annuity"]],
+    ["Endfälliges Darlehen","Interest-only / bullet loan","Pay only interest; repay principal at the end.",
+      ["Lowest monthly outlay","Pairs with an investment/life policy","Tax cases (rented property)"],
+      ["Principal never shrinks","Repayment vehicle may underperform","Rarely suitable for owner-occupiers"]],
+    ["Variables Darlehen","Variable-rate loan","Rate floats with the market; flexible but exposed.",
+      ["Repay anytime, no penalty","Wins if rates fall","Good as a short bridge"],
+      ["Full exposure if rates rise","No payment certainty","Hard to budget around"]],
+  ];
+  let lg = "";
+  loans.forEach(([n,de,fit,pros,cons])=>{
+    lg += `<div class="loan"><div class="lh"><h4>${n} <span class="de">${de}</span></h4></div><p class="fit">→ ${fit}</p><div class="pc"><div><h5>Pros</h5><ul class="pro">${pros.map(p=>`<li>${p}</li>`).join("")}</ul></div><div><h5>Cons</h5><ul class="con">${cons.map(c=>`<li>${c}</li>`).join("")}</ul></div></div></div>`;
+  });
+  $("loanGrid").innerHTML = lg;
+
+  const glossary = [
+    ["Eigenkapital","Your own cash brought to the deal — down payment plus closing costs."],
+    ["Kaufnebenkosten","Closing costs on top of the price: transfer tax, notary, registry, broker (~9–12%)."],
+    ["Grunderwerbsteuer","One-time property transfer tax, set per Bundesland (3.5%–6.5%)."],
+    ["Sollzins / Effektivzins","Nominal rate vs the effective rate including fees — compare on Effektivzins."],
+    ["Zinsbindung","The period your interest rate is fixed (e.g. 10/15/20 years)."],
+    ["Tilgung","The repayment (principal) portion of your annuity; higher = faster payoff."],
+    ["Annuität","The fixed monthly payment = interest + Tilgung, constant through the fix."],
+    ["Sondertilgung","Penalty-free extra repayments, usually up to 5% of the loan per year."],
+    ["Anschlussfinanzierung","Re-financing the residual debt when the fixed-rate period ends."],
+    ["Forward-Darlehen","A loan locking today's rate for a drawdown up to ~5 years in the future."],
+    ["Vorfälligkeitsentschädigung","Penalty the bank charges if you repay/sell during the fixed period."],
+    ["Beleihungswert","The bank's conservative valuation; loans are sized against it, not the price."],
+    ["Beleihungsauslauf","Loan-to-value ratio; lower ratios unlock better interest rates."],
+    ["Grundschuld","The land charge registered as the bank's security over the property."],
+    ["Hausgeld","Monthly condo fee covering shared running costs and the reserve."],
+    ["Instandhaltungsrücklage","The WEG's maintenance reserve fund for future repairs."],
+    ["WEG","Wohnungseigentümergemeinschaft — the community of condo owners that decides shared matters."],
+    ["Sonderumlage","A one-off special levy when the reserve can't cover a big repair."],
+  ];
+  $("glossaryList").innerHTML = glossary.map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join("");
+
+  const sources = [
+    ["KfW","Förderbank — subsidised loans & grants","kfw.de"],
+    ["BaFin","Financial regulator — consumer guidance","bafin.de"],
+    ["Stiftung Warentest","Independent loan & Bauspar comparisons","test.de"],
+    ["Interhyp / Dr. Klein","Mortgage brokers — live rate comparison","interhyp.de"],
+    ["Notarkostenrechner","Estimate notary & registry fees","notar.de"],
+  ];
+  $("sources").innerHTML = sources.map(([n,d,u])=>`<a href="https://${u}" target="_blank" rel="noopener"><div class="nm">${n}</div><div class="ds">${d}</div><div class="ar">${u} ↗</div></a>`).join("");
+}
+
+// ---- wire up ----
+function bind(){
+  document.querySelectorAll("input, select").forEach(el=>{
+    el.addEventListener("input", recompute);
+    el.addEventListener("change", recompute);
+  });
+  // state -> transfer tax
+  $("state").addEventListener("change", ()=>{
+    const rate = STATES.find(s=>s[0]===$("state").value)[1];
+    $("reTax").value = rate;
+    recompute();
+  });
+  $("resetBtn").addEventListener("click", ()=>{
+    $("price").value = DEFAULTS.price;
+    $("state").value = DEFAULTS.state;
+    $("hausgeld").value = DEFAULTS.hausgeld;
+    $("grundsteuer").value = DEFAULTS.grundsteuer;
+    $("fixYears").value = DEFAULTS.fixYears;
+    $("downPct").value = DEFAULTS.downPct;
+    $("rate").value = DEFAULTS.rate;
+    $("tilgung").value = DEFAULTS.tilgung;
+    $("followRate").value = DEFAULTS.followRate;
+    $("appr").value = DEFAULTS.appr;
+    $("reTax").value = DEFAULTS.reTax;
+    $("notar").value = DEFAULTS.notar;
+    $("grundbuch").value = DEFAULTS.grundbuch;
+    $("makler").value = DEFAULTS.makler;
+    $("countRunning").checked = DEFAULTS.countRunning;
+    recompute();
+  });
+}
+
+renderStatic();
+bind();
+recompute();
+</script>
+</body>
+</html>
