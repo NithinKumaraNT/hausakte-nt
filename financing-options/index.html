@@ -344,9 +344,11 @@
   ul.qlist{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
   ul.qlist li{background:var(--surface);padding:15px 18px;display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;}
   ul.qlist li .box{width:15px;height:15px;border:1.5px solid var(--line-2);border-radius:2px;margin-top:4px;}
-  ul.qlist li .q{font-size:14.5px;color:var(--ink);font-weight:500;}
-  ul.qlist li .q .de{font-family:var(--mono);font-size:12px;color:var(--gold);}
-  ul.qlist li .why{font-size:12.5px;color:var(--ink-3);margin-top:4px;}
+  ul.qlist li .q{font-size:14.5px;color:var(--ink);font-weight:600;line-height:1.45;}
+  ul.qlist li .q-de{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--gold);margin-top:6px;line-height:1.4;}
+  ul.qlist li .q-de .speak{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.14em;color:var(--ink-3);vertical-align:middle;margin-right:8px;border:1px solid var(--line-2);padding:1px 5px;border-radius:3px;}
+  ul.qlist li .why{font-size:12.5px;color:var(--ink-3);margin-top:8px;}
+  ul.qlist li .de{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);}
 
   /* ---------- Loan types ---------- */
   .loan-grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -647,7 +649,7 @@
     <div class="sec-head">
       <div class="sec-num">06</div>
       <h2 class="sec-title">Questions for your advisor</h2>
-      <p class="sec-lede">A printable checklist for the Finanzierungsberater / bank. German term in <span class="de" style="font-family:var(--mono);color:var(--gold)">mono</span> so you can say it out loud. Tick them off as you go — print this page (§01 button) and bring it.</p>
+      <p class="sec-lede">A printable checklist for the Finanzierungsberater / bank. Each question shows the English first, then the <span style="font-family:var(--serif);font-style:italic;color:var(--gold)">German to read aloud</span> (marked <span class="de" style="font-family:var(--mono);color:var(--ink-3);border:1px solid var(--line-2);padding:0 4px;border-radius:3px;font-size:10px">DE</span>), with the key term tagged. Tick them off as you go — print this page (§01 button) and bring it.</p>
     </div>
     <div class="sec-body">
       <div class="content" id="checklist"></div>
@@ -983,46 +985,46 @@ function recompute(){
 function renderStatic(){
   const groups = [
     ["A","Rate & lock","The single biggest lever on lifetime cost.",[
-      ["What's the effective annual rate, not just the nominal rate?","Effektivzins vs Sollzins","Effektivzins includes most fees and is the only fair way to compare offers."],
-      ["How long can I fix the rate, and what does each option cost?","Zinsbindung","Longer fixes cost a little more now but remove re-financing risk. 10/15/20/30 yrs are common."],
-      ["What happens at the end of the fixed period?","Anschlussfinanzierung","You'll re-finance the residual at unknown future rates — understand the exposure."],
-      ["Can I lock today's rate for a future drawdown?","Forward-Darlehen","Useful if you expect rates to rise before your current fix ends."],
+      ["What's the effective annual rate, not just the nominal rate?","Effektivzins vs Sollzins","Effektivzins includes most fees and is the only fair way to compare offers.","Wie hoch ist der effektive Jahreszins, nicht nur der Sollzins?"],
+      ["How long can I fix the rate, and what does each option cost?","Zinsbindung","Longer fixes cost a little more now but remove re-financing risk. 10/15/20/30 yrs are common.","Wie lange kann ich den Zinssatz festschreiben, und was kostet welche Zinsbindung?"],
+      ["What happens at the end of the fixed period?","Anschlussfinanzierung","You'll re-finance the residual at unknown future rates — understand the exposure.","Was passiert am Ende der Zinsbindung?"],
+      ["Can I lock today's rate for a future drawdown?","Forward-Darlehen","Useful if you expect rates to rise before your current fix ends.","Kann ich mir den heutigen Zinssatz für eine spätere Auszahlung sichern (Forward-Darlehen)?"],
     ]],
     ["B","Repayment & flexibility","Small changes here move the payoff date by years.",[
-      ["What initial repayment rate do you recommend, and why?","Tilgung","Higher Tilgung = faster payoff, less lifetime interest, but higher monthly cost."],
-      ["How much can I overpay each year for free?","Sondertilgung","Typically 5% of the loan/yr free. It dramatically shortens the loan — get it in writing."],
-      ["Can I change my repayment rate later without cost?","Tilgungssatzwechsel","Flexibility for when income changes; some banks allow 1–3 free switches."],
+      ["What initial repayment rate do you recommend, and why?","Tilgung","Higher Tilgung = faster payoff, less lifetime interest, but higher monthly cost.","Welchen anfänglichen Tilgungssatz empfehlen Sie mir, und warum?"],
+      ["How much can I overpay each year for free?","Sondertilgung","Typically 5% of the loan/yr free. It dramatically shortens the loan — get it in writing.","Wie viel kann ich pro Jahr kostenlos sondertilgen?"],
+      ["Can I change my repayment rate later without cost?","Tilgungssatzwechsel","Flexibility for when income changes; some banks allow 1–3 free switches.","Kann ich den Tilgungssatz später kostenlos ändern (Tilgungssatzwechsel)?"],
     ]],
     ["C","Costs, fees & penalties","The fine print that quietly adds up.",[
-      ["What's the prepayment penalty if I repay or sell early?","Vorfälligkeitsentschädigung","Can be steep within the fixed period — matters a lot given the §04 break-even."],
-      ["Are there commitment-interest charges if drawdown is delayed?","Bereitstellungszinsen","Relevant for new-builds; ask how many months are free."],
-      ["Any account, valuation or estimate fees?","Konto-/Schätzkosten","Bundle these into the Effektivzins comparison."],
+      ["What's the prepayment penalty if I repay or sell early?","Vorfälligkeitsentschädigung","Can be steep within the fixed period — matters a lot given the §04 break-even.","Wie hoch ist die Vorfälligkeitsentschädigung, wenn ich vorzeitig zurückzahle oder verkaufe?"],
+      ["Are there commitment-interest charges if drawdown is delayed?","Bereitstellungszinsen","Relevant for new-builds; ask how many months are free.","Fallen Bereitstellungszinsen an, wenn die Auszahlung sich verzögert?"],
+      ["Any account, valuation or estimate fees?","Konto-/Schätzkosten","Bundle these into the Effektivzins comparison.","Gibt es Konto-, Schätz- oder Bewertungsgebühren?"],
     ]],
     ["D","Loan structure & subsidies","Where free money and better terms hide.",[
-      ["What loan-to-value am I at, and how does it affect my rate?","Beleihungsauslauf","Below ~60% and ~80% LTV are pricing thresholds — more equity can cut the rate."],
-      ["Do you value the property below the purchase price?","Beleihungswert","Banks lend against their valuation, not the price — a gap means more equity needed."],
-      ["Am I eligible for any KfW programmes?","KfW-Förderung","Subsidised loans/grants for energy efficiency or families — often stackable."],
-      ["Should part of this be a Bausparvertrag?","Bauspar-Kombi","Can hedge future rates; compare honestly against a plain annuity — it's not always worth it."],
+      ["What loan-to-value am I at, and how does it affect my rate?","Beleihungsauslauf","Below ~60% and ~80% LTV are pricing thresholds — more equity can cut the rate.","Wie hoch ist mein Beleihungsauslauf, und wie wirkt er sich auf meinen Zinssatz aus?"],
+      ["Do you value the property below the purchase price?","Beleihungswert","Banks lend against their valuation, not the price — a gap means more equity needed.","Setzen Sie den Beleihungswert niedriger an als den Kaufpreis?"],
+      ["Am I eligible for any KfW programmes?","KfW-Förderung","Subsidised loans/grants for energy efficiency or families — often stackable.","Bin ich für KfW-Förderprogramme berechtigt?"],
+      ["Should part of this be a Bausparvertrag?","Bauspar-Kombi","Can hedge future rates; compare honestly against a plain annuity — it's not always worth it.","Sollte ein Teil der Finanzierung über einen Bausparvertrag laufen?"],
     ]],
     ["E","The flat itself","Condo-specific landmines.",[
-      ["Is the maintenance reserve adequate for the building's age?","Instandhaltungsrücklage","An older building with ageing heating/lift needs a healthy reserve, or Sonderumlagen loom."],
-      ["What major works are planned, and what's my share?","Sonderumlage","Your MEA share of any deferred roof/façade/lift work becomes a special levy — confirm timing and whether it's priced in."],
-      ["Show me the last 3 years of owners'-meeting minutes.","Protokolle der Eigentümerversammlung","Reveals disputes, planned works and special levies the listing won't mention."],
-      ["How has the Hausgeld changed over 5 years?","Hausgeld-Entwicklung","Rising Hausgeld erodes the §03 monthly math and the §04 break-even."],
-      ["Is the seller's Grundschuld cleared at closing?","Lastenfreistellung","Any existing liens on the property must be deleted before your money is released."],
+      ["Is the maintenance reserve adequate for the building's age?","Instandhaltungsrücklage","An older building with ageing heating/lift needs a healthy reserve, or Sonderumlagen loom.","Ist die Instandhaltungsrücklage für das Alter des Gebäudes ausreichend?"],
+      ["What major works are planned, and what's my share?","Sonderumlage","Your MEA share of any deferred roof/façade/lift work becomes a special levy — confirm timing and whether it's priced in.","Welche größeren Maßnahmen sind geplant, und wie hoch ist mein Anteil (Sonderumlage)?"],
+      ["Show me the last 3 years of owners'-meeting minutes.","Protokolle der Eigentümerversammlung","Reveals disputes, planned works and special levies the listing won't mention.","Zeigen Sie mir bitte die Protokolle der Eigentümerversammlung der letzten drei Jahre."],
+      ["How has the Hausgeld changed over 5 years?","Hausgeld-Entwicklung","Rising Hausgeld erodes the §03 monthly math and the §04 break-even.","Wie hat sich das Hausgeld in den letzten fünf Jahren entwickelt?"],
+      ["Is the seller's Grundschuld cleared at closing?","Lastenfreistellung","Any existing liens on the property must be deleted before your money is released.","Wird die Grundschuld des Verkäufers beim Kauf gelöscht (Lastenfreistellung)?"],
     ]],
     ["F","You & the risk","Stress-test your own situation.",[
-      ["What monthly payment is realistic if I lose income for 6 months?","Haushaltsrechnung","Banks model this; you should too, including the running costs in §03."],
-      ["What's my residual debt if I have to sell in year 5?","Restschuld","Cross-check against §04 — selling before break-even means a real loss."],
-      ["Do I need residual-debt or building insurance?","Restschuld-/Wohngebäudeversicherung","Wohngebäude is usually mandatory via the WEG; residual-debt cover is optional."],
+      ["What monthly payment is realistic if I lose income for 6 months?","Haushaltsrechnung","Banks model this; you should too, including the running costs in §03.","Welche monatliche Rate ist realistisch, wenn ich sechs Monate kein Einkommen habe?"],
+      ["What's my residual debt if I have to sell in year 5?","Restschuld","Cross-check against §04 — selling before break-even means a real loss.","Wie hoch ist meine Restschuld, wenn ich im fünften Jahr verkaufen muss?"],
+      ["Do I need residual-debt or building insurance?","Restschuld-/Wohngebäudeversicherung","Wohngebäude is usually mandatory via the WEG; residual-debt cover is optional.","Brauche ich eine Restschuld- oder Wohngebäudeversicherung?"],
     ]],
   ];
 
   let html = "";
   groups.forEach(([tag,title,desc,qs])=>{
     let lis = "";
-    qs.forEach(([q,de,why])=>{
-      lis += `<li><span class="box"></span><div><div class="q">${q} <span class="de">· ${de}</span></div><div class="why">${why}</div></div></li>`;
+    qs.forEach(([q,term,why,deq])=>{
+      lis += `<li><span class="box"></span><div><div class="q">${q}</div><div class="q-de" lang="de"><span class="speak">DE</span>„${deq}“</div><div class="why">${why} <span class="de">· ${term}</span></div></div></li>`;
     });
     html += `<div class="checkgroup"><h3><span class="tag">${tag}</span>${title}</h3><p class="gdesc">${desc}</p><ul class="qlist">${lis}</ul></div>`;
   });
